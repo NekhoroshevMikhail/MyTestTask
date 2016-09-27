@@ -13,11 +13,15 @@ public class MyTaskList {
         _taskList = new ArrayList<MyTask>();
     }
 
-    public List<MyTask> get_taskList() {
+    public List<MyTask> getTaskList() {
         return _taskList;
     }
 
-    public void set_taskList(List<MyTask> value) {
+    public void setTaskList(List<MyTask> value) {
         _taskList = value;
+    }
+
+    public void AddTask(MyTask task) {
+        _taskList.add(task);
     }
 }

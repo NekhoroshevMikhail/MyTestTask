@@ -20,7 +20,7 @@ public class XmlDataProcessor implements IDataProcessor {
     @Override
     public MyTaskList GetAllTasks() {
         try {
-            MyTaskList result = new MyTaskList();
+            MyTaskList result;
             FileInputStream fileStream = new FileInputStream(TASKS_LIST_FILE_NAME);
             BufferedInputStream bufferedStream = new BufferedInputStream(fileStream);
             XMLDecoder decoder = new XMLDecoder(bufferedStream);
@@ -52,7 +52,7 @@ public class XmlDataProcessor implements IDataProcessor {
     @Override
     public WorkingNodeList GetAllWorkingNodes() {
         try {
-            WorkingNodeList result = new WorkingNodeList();
+            WorkingNodeList result;
             FileInputStream fileStream = new FileInputStream(WORKING_NODES_FILE_NAME);
             BufferedInputStream bufferedStream = new BufferedInputStream(fileStream);
             XMLDecoder decoder = new XMLDecoder(bufferedStream);

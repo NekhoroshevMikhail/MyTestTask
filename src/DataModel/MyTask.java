@@ -53,12 +53,16 @@ public class MyTask {
         _priority = value;
     }
 
-    public short getMinimummTaskTime()
+    public short getMinimumTaskTime()
     {
         return _minimummTaskTime;
     }
 
-    public void setMinimummTaskTime(short value)
+    public void setMinimumTaskTime(short value) {
+        _minimummTaskTime = value;
+    }
+
+    /*public void setMinimumTaskTime(short value)
             throws OutOfPossibleRangeException, IncorrectRangeException
     {
         if (IsValueInAvailableRange(value)) {
@@ -67,13 +71,16 @@ public class MyTask {
             }
             _minimummTaskTime = value;
         }
-    }
+    }*/
 
     public short getMaximumTaskTime() {
         return _maximumTaskTime;
     }
 
-    public void setMaximumTaskTime(short value)
+    public void setMaximumTaskTime(short value) {
+        _maximumTaskTime = value;
+    }
+/*    public void setMaximumTaskTime(short value)
         throws OutOfPossibleRangeException, IncorrectRangeException
     {
         if (IsValueInAvailableRange(value)) {
@@ -83,7 +90,7 @@ public class MyTask {
 
             _maximumTaskTime = value;
         }
-    }
+    }*/
 
     private Boolean IsValueInAvailableRange(short value)
             throws OutOfPossibleRangeException
