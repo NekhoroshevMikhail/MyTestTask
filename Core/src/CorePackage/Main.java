@@ -5,13 +5,15 @@ import DataModel.*;
 import DataProcessor.IDataProcessor;
 import Exceptions.*;
 
+import java.io.IOException;
+
 /**
  * Created by nekho on 28-Sep-16.
  */
 public class Main {
     public static void main(String[] args) {
         // write your code here
-        try {
+        /*try {
             IDataProcessor result = DataProcessorCreator.CreateDataProcessor(AvailableDataFormats.Xml);
 
             MyTask task = new MyTask();
@@ -36,6 +38,12 @@ public class Main {
         } catch (DataLoaderNotDefinedException ex) {
 
 
+        }*/
+        try {
+            Process p = Runtime.getRuntime().exec("java TaskProcessMainPackage.Main");
+            int i = 0;
+        } catch (IOException e) {
+            e.printStackTrace();
         }
         System.exit(0);
 

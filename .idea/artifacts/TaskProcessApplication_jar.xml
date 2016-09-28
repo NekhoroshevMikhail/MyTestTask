@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="TaskProcessApplication:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/TaskProcessApplication_jar</output-path>
+    <root id="archive" name="TaskProcessApplication.jar">
+      <element id="module-output" name="TaskProcessApplication" />
+    </root>
+  </artifact>
+</component>

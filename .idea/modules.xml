@@ -4,10 +4,13 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Common/Common.iml" filepath="$PROJECT_DIR$/Common/Common.iml" />
       <module fileurl="file://$PROJECT_DIR$/Core/Core.iml" filepath="$PROJECT_DIR$/Core/Core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/CreateTransportFactory/CreateTransportFactory.iml" filepath="$PROJECT_DIR$/CreateTransportFactory/CreateTransportFactory.iml" />
       <module fileurl="file://$PROJECT_DIR$/DataAccess/DataAccess.iml" filepath="$PROJECT_DIR$/DataAccess/DataAccess.iml" />
       <module fileurl="file://$PROJECT_DIR$/DataAccessFactory/DataAccessFactory.iml" filepath="$PROJECT_DIR$/DataAccessFactory/DataAccessFactory.iml" />
       <module fileurl="file://$PROJECT_DIR$/Main/Main.iml" filepath="$PROJECT_DIR$/Main/Main.iml" />
       <module fileurl="file://$PROJECT_DIR$/MyTestTask.iml" filepath="$PROJECT_DIR$/MyTestTask.iml" />
+      <module fileurl="file://$PROJECT_DIR$/TaskProcessApplication/TaskProcessApplication.iml" filepath="$PROJECT_DIR$/TaskProcessApplication/TaskProcessApplication.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Transport/Transport.iml" filepath="$PROJECT_DIR$/Transport/Transport.iml" />
     </modules>
   </component>
 </project>
