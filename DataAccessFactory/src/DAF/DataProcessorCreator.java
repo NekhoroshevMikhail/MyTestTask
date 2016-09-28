@@ -1,7 +1,8 @@
-package DataProcessorFactory;
+package DAF;
 
+import DataProcessor.IDataProcessor;
 import Exceptions.DataLoaderNotDefinedException;
-import XmlDataProcessor.XmlDataProcessor;
+import XmlDataAccess.XmlDataProcessor;
 
 /**
  * Created by nekho on 27-Sep-16.

@@ -1,16 +1,16 @@
-package com.company;
+package CorePackage;
 
-import DataModel.MyTask;
-import DataModel.MyTaskList;
-import DataProcessorFactory.AvailableDataFormats;
-import DataProcessorFactory.DataProcessorCreator;
-import DataProcessorFactory.IDataProcessor;
+import DAF.*;
+import DataModel.*;
+import DataProcessor.IDataProcessor;
 import Exceptions.*;
 
+/**
+ * Created by nekho on 28-Sep-16.
+ */
 public class Main {
-
     public static void main(String[] args) {
-	// write your code here
+        // write your code here
         try {
             IDataProcessor result = DataProcessorCreator.CreateDataProcessor(AvailableDataFormats.Xml);
 
@@ -37,6 +37,7 @@ public class Main {
 
 
         }
+        System.exit(0);
 
     }
 }

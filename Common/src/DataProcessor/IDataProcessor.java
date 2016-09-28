@@ -1,4 +1,4 @@
-package DataProcessorFactory;
+package DataProcessor;
 
 import DataModel.MyTaskList;
 import DataModel.WorkingNodeList;
