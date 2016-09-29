@@ -1,6 +1,6 @@
 package XmlDataAccess;
 
-import DataProcessor.IDataProcessor;
+import DataProcessor.IDataAccessor;
 import DataModel.MyTaskList;
 import DataModel.WorkingNodeList;
 
@@ -11,7 +11,7 @@ import java.io.*;
 /**
  * Created by nekho on 27-Sep-16.
  */
-public class XmlDataProcessor implements IDataProcessor {
+public class XmlDataProcessor implements IDataAccessor {
 
     private final String WORKING_NODES_FILE_NAME = "WorkingNodes.xml";
     private final String TASKS_LIST_FILE_NAME = "Tasks.xml";

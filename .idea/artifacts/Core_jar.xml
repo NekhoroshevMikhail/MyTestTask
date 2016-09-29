@@ -1,0 +1,11 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Core:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/Core_jar</output-path>
+    <root id="archive" name="Core.jar">
+      <element id="module-output" name="Core" />
+      <element id="module-output" name="DataAccessFactory" />
+      <element id="module-output" name="Common" />
+      <element id="module-output" name="DataAccess" />
+    </root>
+  </artifact>
+</component>
