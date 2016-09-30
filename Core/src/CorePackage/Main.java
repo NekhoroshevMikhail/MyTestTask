@@ -19,8 +19,8 @@ public class Main {
             return;
         }
 
-        WorkingNodesRunner runner = new WorkingNodesRunner(accessor.GetAllWorkingNodes());
-        runner.RunAllNodes();
+        WorkingNodesManager manager = new WorkingNodesManager(accessor.GetAllWorkingNodes());
+        manager.RunAllNodes();
 
         System.exit(0);
 

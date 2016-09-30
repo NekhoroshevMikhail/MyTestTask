@@ -12,11 +12,13 @@ import java.awt.*;
  */
 public class Main {
     public static void main(String[] args) {
-        Short portNumber = Short.parseShort(args[1]);
+        TaskProcessorThread thread = new TaskProcessorThread(args[0], Integer.decode(args[1]));
+        thread.start();
         try {
-            IDataTransporter dataTransporter = TransporterCreator.CreateDataProcessor(PossibleTransport.Tcp, "localhost", portNumber.shortValue());
-        } catch (TransorterNotRealizedExceptioin ex) {
-            ex.printStackTrace();
+            thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
+        System.exit(0);
     }
 }

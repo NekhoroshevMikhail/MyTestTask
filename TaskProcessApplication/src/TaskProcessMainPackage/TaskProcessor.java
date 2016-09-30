@@ -6,8 +6,8 @@ import java.awt.*;
 /**
  * Created by nekho on 30-Sep-16.
  */
-public class TaskProcessorFrame extends JFrame {
+public class TaskProcessor extends JFrame {
 
-    public TaskProcessorFrame(String name, short port) {
+    public TaskProcessor(String name, short port) {
     }
 }

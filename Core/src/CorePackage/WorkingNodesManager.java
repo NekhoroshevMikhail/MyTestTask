@@ -8,11 +8,11 @@ import java.io.IOException;
 /**
  * Created by nekho on 29-Sep-16.
  */
-public class WorkingNodesRunner {
+public class WorkingNodesManager {
 
     WorkingNodeList _nodesToRun;
 
-    public WorkingNodesRunner(WorkingNodeList nodesToRun) {
+    public WorkingNodesManager(WorkingNodeList nodesToRun) {
         _nodesToRun = nodesToRun;
     }
 
