@@ -9,6 +9,7 @@ import TransportCommon.IDataTransporter;
 import TransportCommon.TransporterSide;
 
 import javax.swing.*;
+import java.awt.*;
 
 /**
  * Created by nekho on 30-Sep-16.
@@ -28,7 +29,7 @@ public class TaskProcessorThread extends Thread implements IDataReceivedListener
     public synchronized void start() {
         short portNumber = (short)_port;
         try {
-            _dataTransporter = TransporterCreator.CreateDataTransporter(PossibleTransport.Tcp, "127.0.0.1", portNumber, TransporterSide.Server);
+            _dataTransporter = TransporterCreator.CreateDataTransporter(PossibleTransport.Tcp, "localhost", portNumber, TransporterSide.Server);
             _dataTransporter.TryConnect();
         } catch (TransorterNotRealizedExceptioin ex) {
             ex.printStackTrace();
@@ -47,10 +48,10 @@ public class TaskProcessorThread extends Thread implements IDataReceivedListener
 
     @Override
     public void DataReceived(byte[] data) {
-        JFrame frame = new JFrame("test");
-        frame.setSize(300,300);
-        JLabel label = new JLabel(data.toString());
-        frame.add(label);
-        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        Frame fr = new Frame();
+        Label label = new Label("123123123");
+        fr.add(label);
+        fr.setSize(300,300);
+        fr.setVisible(true);
     }
 }

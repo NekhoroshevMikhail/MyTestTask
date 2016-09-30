@@ -3,6 +3,9 @@
     <output-path>$PROJECT_DIR$/out/artifacts/TaskProcessApplication_jar</output-path>
     <root id="archive" name="TaskProcessApplication.jar">
       <element id="module-output" name="TaskProcessApplication" />
+      <element id="module-output" name="CreateTransportFactory" />
+      <element id="module-output" name="Common" />
+      <element id="module-output" name="Transport" />
     </root>
   </artifact>
 </component>

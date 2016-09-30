@@ -16,7 +16,7 @@ import java.util.ArrayList;
  */
 public class TcpDataTransporter implements IDataTransporter {
 
-    private final int SOCKET_ACCEPT_TIMEOUT = 10000;
+    private final int SOCKET_ACCEPT_TIMEOUT = 15000;
 
     private String _address;
     private int _port;
@@ -56,6 +56,7 @@ public class TcpDataTransporter implements IDataTransporter {
             case Server:
                 try{
                     ServerSocket serverSocket = new ServerSocket(_port, 1, InetAddress.getByName(_address));
+
                     serverSocket.setSoTimeout(SOCKET_ACCEPT_TIMEOUT);
                     _socket = serverSocket.accept();
                     _inputStream = _socket.getInputStream();
@@ -139,6 +140,6 @@ public class TcpDataTransporter implements IDataTransporter {
                 }
             }
         });
-        listenDataThread.start();
+        listenDataThread.run();
     }
 }

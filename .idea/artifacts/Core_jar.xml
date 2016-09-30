@@ -6,6 +6,8 @@
       <element id="module-output" name="DataAccessFactory" />
       <element id="module-output" name="Common" />
       <element id="module-output" name="DataAccess" />
+      <element id="module-output" name="CreateTransportFactory" />
+      <element id="module-output" name="Transport" />
     </root>
   </artifact>
 </component>

@@ -9,5 +9,6 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="DataAccessFactory" />
     <orderEntry type="module" module-name="Common" />
+    <orderEntry type="module" module-name="CreateTransportFactory" />
   </component>
 </module>
