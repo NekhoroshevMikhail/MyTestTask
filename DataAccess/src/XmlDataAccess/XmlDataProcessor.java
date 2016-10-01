@@ -73,6 +73,7 @@ public class XmlDataProcessor implements IDataAccessor {
             XMLEncoder xmlEncoder = new XMLEncoder(bufferedStream);
             xmlEncoder.writeObject(listOfWorkingNodes);
             xmlEncoder.close();
+
         } catch (FileNotFoundException ex) {
 
             //todo: добавить логгер

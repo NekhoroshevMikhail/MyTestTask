@@ -27,7 +27,7 @@ public class TaskProcessor implements Runnable, IDataReceivedListener {
     public void run() {
          try {
             _dataTransporter = TransporterCreator.CreateDataTransporter(PossibleTransport.Tcp, "localhost", _port, TransporterSide.Server);
-             _dataTransporter.AddDataReceivedListener(this);
+            _dataTransporter.AddDataReceivedListener(this);
             _dataTransporter.TryConnect();
             _dataTransporter.StartListenIncomingData();
         } catch (TransorterNotRealizedExceptioin ex) {

@@ -1,6 +1,8 @@
 package CorePackage;
 import DAF.AvailableDataFormats;
 import DAF.DataAccessorCreator;
+import DataModel.WorkingNode;
+import DataModel.WorkingNodeList;
 import DataProcessor.IDataAccessor;
 import Exceptions.DataAccessorNotDefinedException;
 import Exceptions.SideOfTransporterNotRealizedException;
