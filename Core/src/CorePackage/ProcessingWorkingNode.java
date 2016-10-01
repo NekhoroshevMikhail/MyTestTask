@@ -27,8 +27,6 @@ public class ProcessingWorkingNode extends WorkingNode implements IDataReceivedL
     private WorkingNodeState _currentNodeState;
     private ArrayList<IWorkingNodeStateChangedListener> _listeners;
 
-    private int _port;
-
     public ProcessingWorkingNode(WorkingNode node) {
         super(node);
         _isBusy = false;
@@ -66,7 +64,7 @@ public class ProcessingWorkingNode extends WorkingNode implements IDataReceivedL
     private void ConnectAndCreateTransporter() {
         IDataTransporter transporter = null;
         try {
-            transporter = TransporterCreator.CreateDataTransporter(PossibleTransport.Tcp, "localhost", _port, TransporterSide.Client);
+            transporter = TransporterCreator.CreateDataTransporter(PossibleTransport.Tcp, "localhost", port, TransporterSide.Client);
             transporter.AddDataReceivedListener(this);
         } catch (TransorterNotRealizedExceptioin transorterNotRealizedExceptioin) {
             transorterNotRealizedExceptioin.printStackTrace();
