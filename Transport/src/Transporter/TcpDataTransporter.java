@@ -23,8 +23,8 @@ public class TcpDataTransporter implements IDataTransporter {
     private TransporterSide _createdSide;
     private Socket _socket;
 
-    private InputStream _inputStream;
-    private OutputStream _outputStream;
+    private DataInputStream _inputStream;
+    private DataOutputStream _outputStream;
     private Boolean _isConnected;
     private ArrayList<IDataReceivedListener> _listeners;
 
@@ -48,6 +48,8 @@ public class TcpDataTransporter implements IDataTransporter {
             case Client:
                 try {
                     _socket = new Socket(InetAddress.getByName(_address), _port);
+                    _inputStream = new DataInputStream(_socket.getInputStream());
+                    _outputStream = new DataOutputStream(_socket.getOutputStream());
                     _isConnected = true;
                 }catch (IOException ex) {
                     ex.printStackTrace();
@@ -55,14 +57,13 @@ public class TcpDataTransporter implements IDataTransporter {
                 break;
             case Server:
                 try{
-                    ServerSocket serverSocket = new ServerSocket(_port, 1, InetAddress.getByName(_address));
+                    ServerSocket serverSocket = new ServerSocket(_port);
 
                     serverSocket.setSoTimeout(SOCKET_ACCEPT_TIMEOUT);
                     _socket = serverSocket.accept();
-                    _inputStream = _socket.getInputStream();
-                    _outputStream = _socket.getOutputStream();
+                    _inputStream = new DataInputStream(_socket.getInputStream());
+                    _outputStream = new DataOutputStream(_socket.getOutputStream());
                     _isConnected = true;
-                    StartListenData();
                 }catch (IOException ex) {
                    ex.printStackTrace();
                 }
@@ -76,6 +77,8 @@ public class TcpDataTransporter implements IDataTransporter {
     @Override
     public void Disconnect() {
         try{
+            _inputStream.close();
+            _outputStream.close();
             _socket.close();
         }catch (IOException ex) {
             ex.printStackTrace();
@@ -111,35 +114,58 @@ public class TcpDataTransporter implements IDataTransporter {
         }
     }
 
-    private void StartListenData(){
+    public void StartListenIncomingData(){
         Thread listenDataThread = new Thread(new Runnable() {
             @Override
             public void run() {
                 while(_isConnected) {
-                    int availalbe;
+                    /*byte[] buffer = new byte[1024];
+                    int bytesReadedFromStream = 0;
                     try {
-                        availalbe = _inputStream.available();
+                        byte receivedByte;
+                        try{
+                            while ((receivedByte = _inputStream.readByte()) != -1) {
+                                buffer[bytesReadedFromStream] = receivedByte;
+                                bytesReadedFromStream++;
+                            }
+                        }catch (EOFException ex) {
+                            ex.printStackTrace();
+                        }
                     } catch (IOException e) {
                         e.printStackTrace();
                         continue;
                     }
-                    if (availalbe > 0) {
-                        byte[] receivedData = new byte[availalbe];
-                        try {
-                            _inputStream.read(receivedData, 0, receivedData.length);
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                            continue;
-                        }
+                    catch (Exception ex) {
+                        int i = 0;
+                    }
+                    if (bytesReadedFromStream > 0) {
+                        byte[] receivedData = new byte[bytesReadedFromStream];
+                        System.arraycopy(buffer, 0, receivedData, 0, bytesReadedFromStream);
                         synchronized (_listeners) {
                             for (IDataReceivedListener someDataListener: _listeners) {
                                 someDataListener.DataReceived(receivedData);
                             }
                         }
+                    }*/
+
+                    try {
+                        int availableBytes =_inputStream.available();
+                        if (availableBytes > 0) {
+                            byte[] receivedData = new byte[availableBytes];
+                            _inputStream.read(receivedData, 0, receivedData.length);
+                            synchronized (_listeners) {
+                                for (IDataReceivedListener someDataListener: _listeners) {
+                                    someDataListener.DataReceived(receivedData);
+                                }
+                            }
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
                     }
                 }
             }
         });
-        listenDataThread.run();
+        Boolean result = listenDataThread.isDaemon();
+        listenDataThread.start();
     }
 }

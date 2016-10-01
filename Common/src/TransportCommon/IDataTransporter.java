@@ -10,6 +10,7 @@ import java.io.IOException;
 public interface IDataTransporter {
     Boolean TryConnect() throws SideOfTransporterNotRealizedException;
     void Disconnect();
+    void StartListenIncomingData();
     void SendPacket(byte[] data);
     void AddDataReceivedListener(IDataReceivedListener listener);
     void RemoveDataReceivedListener(IDataReceivedListener listener);

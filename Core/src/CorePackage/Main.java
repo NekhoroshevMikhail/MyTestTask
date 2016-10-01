@@ -10,10 +10,6 @@ import Factory.TransporterCreator;
 import TransportCommon.IDataTransporter;
 import TransportCommon.TransporterSide;
 
-import java.io.IOException;
-import java.io.OutputStream;
-import java.net.Socket;
-
 /**
  * Created by nekho on 28-Sep-16.
  */
@@ -41,6 +37,7 @@ public class Main {
         if (transporter != null) {
             try {
                 transporter.TryConnect();
+                transporter.StartListenIncomingData();
             } catch (SideOfTransporterNotRealizedException e) {
                 e.printStackTrace();
             }
