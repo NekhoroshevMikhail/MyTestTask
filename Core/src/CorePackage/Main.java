@@ -25,35 +25,14 @@ public class Main {
             return;
         }
 
-        WorkingNodesManager manager = new WorkingNodesManager(accessor.GetAllWorkingNodes());
-        manager.RunAllNodes();
-
-        IDataTransporter transporter = null;
+        WorkingNodesManager manager = new WorkingNodesManager(accessor.GetAllWorkingNodes(), accessor.GetAllTasks());
+        manager.StartWork();
         try {
-            transporter = TransporterCreator.CreateDataTransporter(PossibleTransport.Tcp, "localhost", 123, TransporterSide.Client);
-        } catch (TransorterNotRealizedExceptioin transorterNotRealizedExceptioin) {
-            transorterNotRealizedExceptioin.printStackTrace();
+            Thread.sleep(30000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
-        if (transporter != null) {
-            try {
-                transporter.TryConnect();
-                transporter.StartListenIncomingData();
-            } catch (SideOfTransporterNotRealizedException e) {
-                e.printStackTrace();
-            }
-            while(true) {
-                if (transporter.IsConnected()) {
-                    transporter.SendPacket(new byte[] {1,2,3});
-                }
-                try {
-                    Thread.sleep((long) 1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-
-        }
-        transporter.Disconnect();
+        manager.FinishWork();
         System.exit(0);
 
     }

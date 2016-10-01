@@ -4,6 +4,7 @@ import Exceptions.BelowZeroException;
 import Exceptions.EmptyNameException;
 import Exceptions.IncorrectRangeException;
 import Exceptions.OutOfPossibleRangeException;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 
 /**
  * Created by nekho on 27-Sep-16.
@@ -14,6 +15,7 @@ public class MyTask {
     private final short POSSIBLE_MINIMUM_TASK_TIME = 5;
     private final short POSSIBLE_MAXIMUM_TASK_TIME = 25;
     private final short DEFAULT_PRIORITY = 0;
+
 
     private String _name;
     private short _priority;
@@ -27,7 +29,7 @@ public class MyTask {
         _maximumTaskTime = POSSIBLE_MAXIMUM_TASK_TIME;
     }
 
-    public String getName() {
+        public String getName() {
         return _name;
     }
 

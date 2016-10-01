@@ -7,11 +7,16 @@ import Exceptions.EmptyNameException;
  * Created by nekho on 27-Sep-16.
  */
 public class WorkingNode {
-    private String _name;
-    private short _port;
+    protected String name;
+    protected int port;
+
+    public WorkingNode(WorkingNode node) {
+        name = node.getName();
+        port = node.getPort();
+    }
 
     public String getName() {
-        return _name;
+        return name;
     }
 
     public void setName(String value)
@@ -20,11 +25,11 @@ public class WorkingNode {
         if (value == null || value.length() == 0) {
             throw new EmptyNameException("working node can not has empty name");
         }
-        _name = value;
+        name = value;
     }
 
-    public short getPort() {
-        return _port;
+    public int getPort() {
+        return port;
     }
 
     public void setPort(short value)
@@ -33,6 +38,6 @@ public class WorkingNode {
         if (value < 0) {
             throw new BelowZeroException("port value can not be below zero");
         }
-        _port = value;
+        port = value;
     }
 }

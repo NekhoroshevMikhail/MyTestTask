@@ -6,9 +6,7 @@ import TransportCommon.IDataTransporter;
 import TransportCommon.TransporterSide;
 
 import java.io.*;
-import java.net.InetAddress;
-import java.net.ServerSocket;
-import java.net.Socket;
+import java.net.*;
 import java.util.ArrayList;
 
 /**
@@ -118,8 +116,13 @@ public class TcpDataTransporter implements IDataTransporter {
         Thread listenDataThread = new Thread(new Runnable() {
             @Override
             public void run() {
+                try {
+                    _socket.setSoTimeout(1000);
+                } catch (SocketException e) {
+                    e.printStackTrace();
+                }
                 while(_isConnected) {
-                    /*byte[] buffer = new byte[1024];
+                    byte[] buffer = new byte[1024];
                     int bytesReadedFromStream = 0;
                     try {
                         byte receivedByte;
@@ -131,13 +134,14 @@ public class TcpDataTransporter implements IDataTransporter {
                         }catch (EOFException ex) {
                             ex.printStackTrace();
                         }
+                        catch (SocketTimeoutException ex) {
+                            ex.printStackTrace();
+                        }
                     } catch (IOException e) {
                         e.printStackTrace();
                         continue;
                     }
-                    catch (Exception ex) {
-                        int i = 0;
-                    }
+
                     if (bytesReadedFromStream > 0) {
                         byte[] receivedData = new byte[bytesReadedFromStream];
                         System.arraycopy(buffer, 0, receivedData, 0, bytesReadedFromStream);
@@ -146,21 +150,6 @@ public class TcpDataTransporter implements IDataTransporter {
                                 someDataListener.DataReceived(receivedData);
                             }
                         }
-                    }*/
-
-                    try {
-                        int availableBytes =_inputStream.available();
-                        if (availableBytes > 0) {
-                            byte[] receivedData = new byte[availableBytes];
-                            _inputStream.read(receivedData, 0, receivedData.length);
-                            synchronized (_listeners) {
-                                for (IDataReceivedListener someDataListener: _listeners) {
-                                    someDataListener.DataReceived(receivedData);
-                                }
-                            }
-                        }
-                    } catch (IOException e) {
-                        e.printStackTrace();
                     }
                 }
             }
