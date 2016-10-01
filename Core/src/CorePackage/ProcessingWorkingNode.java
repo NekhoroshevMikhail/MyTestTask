@@ -9,6 +9,11 @@ import Exceptions.SideOfTransporterNotRealizedException;
 import Exceptions.TransorterNotRealizedExceptioin;
 import Factory.PossibleTransport;
 import Factory.TransporterCreator;
+import Protocol.Arguments.MachineNameArgumentBody;
+import Protocol.Arguments.MaximumDurationArgumentBody;
+import Protocol.Arguments.MinimumDurationArgumentBody;
+import Protocol.Enums.TaskPacketType;
+import Protocol.TaskPacket;
 import TransportCommon.IDataReceivedListener;
 import TransportCommon.IDataTransporter;
 import TransportCommon.TransporterSide;
@@ -21,7 +26,6 @@ import java.util.ArrayList;
  * Created by nekho on 01-Oct-16.
  */
 public class ProcessingWorkingNode extends WorkingNode implements IDataReceivedListener{
-    private Boolean _isBusy;
     private IDataTransporter _dataTransporter;
     private MyTask _currentTask;
     private WorkingNodeState _currentNodeState;
@@ -29,7 +33,6 @@ public class ProcessingWorkingNode extends WorkingNode implements IDataReceivedL
 
     public ProcessingWorkingNode(WorkingNode node) {
         super(node);
-        _isBusy = false;
         _currentTask = null;
         _currentNodeState = WorkingNodeState.Idle;
         _listeners = new ArrayList<>();
@@ -86,11 +89,26 @@ public class ProcessingWorkingNode extends WorkingNode implements IDataReceivedL
     }
 
     public void SetNewTask(MyTask task) throws WorkingNodeIsBusyException {
-        if (_isBusy) {
+        if (_currentNodeState != WorkingNodeState.Idle && _currentNodeState != WorkingNodeState.WaitingTask) {
             throw new WorkingNodeIsBusyException("You can not set new task when working Node is Busy");
         }
         _currentTask = task;
-        _dataTransporter.SendPacket(new byte[] {1,2,3,4,5});
+        PrepareAndSendPacketWithCurrentTask();
+        //_dataTransporter.SendPacket(new byte[] {1,2,3,4,5});
+
+    }
+
+    private void PrepareAndSendPacketWithCurrentTask() {
+        TaskPacket packet = new TaskPacket();
+        packet.SetType(TaskPacketType.NewTask);
+        MachineNameArgumentBody machineName = new MachineNameArgumentBody(_currentTask.getName());
+        MaximumDurationArgumentBody maximumDurationArgumentBody = new MaximumDurationArgumentBody(_currentTask.getMaximumTaskTime());
+        MinimumDurationArgumentBody minimumDurationArgumentBody = new MinimumDurationArgumentBody(_currentTask.getMinimumTaskTime());
+        packet.AddArgument(machineName);
+        packet.AddArgument(maximumDurationArgumentBody);
+        packet.AddArgument(minimumDurationArgumentBody);
+        byte[] dataForSend = packet.Serialize();
+        _dataTransporter.SendPacket(dataForSend);
     }
 
     public void StopCurrentTask() {
@@ -100,8 +118,41 @@ public class ProcessingWorkingNode extends WorkingNode implements IDataReceivedL
     @Override
     //todo: измегить реализацию событий, чтобы они наружу не торчали.
     public void DataReceived(byte[] data) {
-        //todo: parseData and processData;
+        TaskPacket receivedPacket = new TaskPacket();
+        receivedPacket.Parse(data);
+
+        if (receivedPacket.IsPacketCorrect()) {
+            switch (receivedPacket.GetPacketType())
+            {
+                case TaskPacketType.NewTaskAck:
+                    _currentNodeState = WorkingNodeState.InProgress;
+                    break;
+                case TaskPacketType.TaskCompleted:
+                    SendTaskCompletedAck();
+                    _currentNodeState = WorkingNodeState.WaitingTask;
+                    break;
+                case TaskPacketType.TaskError:
+                    SendTaskErrorAck();
+                    _currentNodeState = WorkingNodeState.Error;
+                     break;
+            }
+        }
     }
+
+    private void SendTaskCompletedAck() {
+        TaskPacket taskCompletedAck = new TaskPacket();
+        taskCompletedAck.SetType(TaskPacketType.TaskCompletedAck);
+        byte[] dataForSend = taskCompletedAck.Serialize();
+        _dataTransporter.SendPacket(dataForSend);
+    }
+
+    private void SendTaskErrorAck() {
+        TaskPacket taskCompletedAck = new TaskPacket();
+        taskCompletedAck.SetType(TaskPacketType.TaskErrorAck);
+        byte[] dataForSend = taskCompletedAck.Serialize();
+        _dataTransporter.SendPacket(dataForSend);
+    }
+
 }
 
 
