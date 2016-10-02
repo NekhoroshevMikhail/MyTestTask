@@ -8,7 +8,7 @@ import XmlDataAccess.XmlDataProcessor;
  * Created by nekho on 27-Sep-16.
  */
 public class DataAccessorCreator {
-    public static IDataAccessor CreateDataProcessor(AvailableDataFormats processorType)
+    public static IDataAccessor CreateDataAccessor(AvailableDataFormats processorType)
         throws DataAccessorNotDefinedException
     {
         switch (processorType)

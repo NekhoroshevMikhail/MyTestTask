@@ -1,4 +1,5 @@
 package CorePackage;
+import CorePackage.GUI.MainWindow;
 import DAF.AvailableDataFormats;
 import DAF.DataAccessorCreator;
 import DataModel.MyTask;
@@ -16,18 +17,19 @@ import TransportCommon.TransporterSide;
  * Created by nekho on 28-Sep-16.
  */
 public class Main {
-    public static void main(String[] args) throws IncorrectRangeException, OutOfPossibleRangeException, BelowZeroException, EmptyNameException {
+    public static void main(String[] args) {
+        WorkStarter starter = new WorkStarter();
+        if (args.length == 0) {
+            MainWindow window = new MainWindow("Starting work window", starter);
+            window.setVisible(true);
+        } else {
+            if (args.length < 2) {
+                System.out.println("Incorrect parameters number!");
+                return;
 
-        IDataAccessor accessor = null;
-        try{
-            accessor = DataAccessorCreator.CreateDataProcessor(AvailableDataFormats.Xml);
-        }catch (DataAccessorNotDefinedException ex) {
-            //// TODO: добавить логгер
-            System.exit(0);
-            return;
+            }
+            starter.StartWork(args[0], args[1]);
         }
 
-        WorkingNodesManager manager = new WorkingNodesManager(accessor.GetAllWorkingNodes(), accessor.GetAllTasks());
-        manager.StartWork();
     }
 }

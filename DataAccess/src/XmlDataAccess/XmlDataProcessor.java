@@ -16,11 +16,14 @@ public class XmlDataProcessor implements IDataAccessor {
     private final String WORKING_NODES_FILE_NAME = "WorkingNodes.xml";
     private final String TASKS_LIST_FILE_NAME = "Tasks.xml";
 
-    @Override
     public MyTaskList GetAllTasks() {
+        return GetAllTasks(TASKS_LIST_FILE_NAME);
+    }
+    @Override
+    public MyTaskList GetAllTasks(String filePath) {
         try {
             MyTaskList result;
-            FileInputStream fileStream = new FileInputStream(TASKS_LIST_FILE_NAME);
+            FileInputStream fileStream = new FileInputStream(filePath);
             BufferedInputStream bufferedStream = new BufferedInputStream(fileStream);
             XMLDecoder decoder = new XMLDecoder(bufferedStream);
             result = (MyTaskList) decoder.readObject();
@@ -44,11 +47,15 @@ public class XmlDataProcessor implements IDataAccessor {
         }
     }
 
-    @Override
     public WorkingNodeList GetAllWorkingNodes() {
+        return GetAllWorkingNodes(WORKING_NODES_FILE_NAME);
+    }
+
+    @Override
+    public WorkingNodeList GetAllWorkingNodes(String filePath) {
         try {
             WorkingNodeList result;
-            FileInputStream fileStream = new FileInputStream(WORKING_NODES_FILE_NAME);
+            FileInputStream fileStream = new FileInputStream(filePath);
             BufferedInputStream bufferedStream = new BufferedInputStream(fileStream);
             XMLDecoder decoder = new XMLDecoder(bufferedStream);
             result = (WorkingNodeList) decoder.readObject();

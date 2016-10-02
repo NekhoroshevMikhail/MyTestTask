@@ -8,8 +8,10 @@ import DataModel.WorkingNodeList;
  */
 public interface IDataAccessor {
     MyTaskList GetAllTasks();
+    MyTaskList GetAllTasks(String filePath);
     void SaveAllTasks(MyTaskList listOfTasks);
 
     WorkingNodeList GetAllWorkingNodes();
+    WorkingNodeList GetAllWorkingNodes(String filePath);
     void SaveAllWorkingNodes(WorkingNodeList listOfWorkingNodes);
 }

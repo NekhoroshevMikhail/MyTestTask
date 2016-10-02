@@ -8,10 +8,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1373aae4-2340-4c97-bddc-4d88024d8786" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Core/src/CorePackage/GUI/MainWindow.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Core/src/CorePackage/Interfaces/IStartWorker.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Core/src/CorePackage/WorkStarter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Common/src/DataProcessor/IDataAccessor.java" afterPath="$PROJECT_DIR$/Common/src/DataProcessor/IDataAccessor.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Core/src/CorePackage/Main.java" afterPath="$PROJECT_DIR$/Core/src/CorePackage/Main.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/DataAccess/src/XmlDataAccess/XmlDataProcessor.java" afterPath="$PROJECT_DIR$/DataAccess/src/XmlDataAccess/XmlDataProcessor.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/DataAccessFactory/src/DAF/DataAccessorCreator.java" afterPath="$PROJECT_DIR$/DataAccessFactory/src/DAF/DataAccessorCreator.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TaskProcessApplication/src/TaskProcessMainPackage/TaskManager.java" afterPath="$PROJECT_DIR$/TaskProcessApplication/src/TaskProcessMainPackage/TaskManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TaskProcessApplication/src/TaskProcessMainPackage/TaskProcessor.java" afterPath="$PROJECT_DIR$/TaskProcessApplication/src/TaskProcessMainPackage/TaskProcessor.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Transport/src/Transporter/TcpDataTransporter.java" afterPath="$PROJECT_DIR$/Transport/src/Transporter/TcpDataTransporter.java" />
     </list>
     <ignored path="MyTestTask.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -35,48 +40,8 @@
       <file leaf-file-name="ProcessingWorkingNode.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Core/src/CorePackage/ProcessingWorkingNode.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="173">
-              <caret line="117" column="0" selection-start-line="117" selection-start-column="0" selection-end-line="117" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="WorkingNodesManager.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Core/src/CorePackage/WorkingNodesManager.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-748">
-              <caret line="32" column="16" selection-start-line="32" selection-start-column="16" selection-end-line="32" selection-end-column="16" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="IDataTransporter.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Common/src/TransportCommon/IDataTransporter.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="13" column="9" selection-start-line="13" selection-start-column="9" selection-end-line="13" selection-end-column="9" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TcpDataTransporter.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Transport/src/Transporter/TcpDataTransporter.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="281">
-              <caret line="160" column="0" selection-start-line="160" selection-start-column="0" selection-end-line="160" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/TaskProcessApplication/src/TaskProcessMainPackage/Main.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+            <state relative-caret-position="258">
+              <caret line="120" column="0" selection-start-line="120" selection-start-column="0" selection-end-line="120" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -85,8 +50,40 @@
       <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Core/src/CorePackage/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="30" column="23" selection-start-line="30" selection-start-column="23" selection-end-line="30" selection-end-column="23" />
+            <state relative-caret-position="306">
+              <caret line="30" column="27" selection-start-line="30" selection-start-column="27" selection-end-line="30" selection-end-column="27" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="WorkStarter.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Core/src/CorePackage/WorkStarter.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="476">
+              <caret line="33" column="0" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="IDataAccessor.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Common/src/DataProcessor/IDataAccessor.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="136">
+              <caret line="9" column="20" selection-start-line="9" selection-start-column="20" selection-end-line="9" selection-end-column="20" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="IStartWorker.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Core/src/CorePackage/Interfaces/IStartWorker.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="119">
+              <caret line="7" column="21" selection-start-line="7" selection-start-column="21" selection-end-line="7" selection-end-column="21" />
               <folding />
             </state>
           </provider>
@@ -95,8 +92,20 @@
       <file leaf-file-name="TaskManager.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/TaskProcessApplication/src/TaskProcessMainPackage/TaskManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="396">
-              <caret line="99" column="0" selection-start-line="99" selection-start-column="0" selection-end-line="99" selection-end-column="0" />
+            <state relative-caret-position="430">
+              <caret line="137" column="0" selection-start-line="137" selection-start-column="0" selection-end-line="137" selection-end-column="0" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MainWindow.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Core/src/CorePackage/GUI/MainWindow.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="578">
+              <caret line="34" column="0" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -116,27 +125,29 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TaskProcessor.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/TaskProcessApplication/src/TaskProcessMainPackage/TaskProcessor.java">
+      <file leaf-file-name="XmlDataProcessor.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/DataAccess/src/XmlDataAccess/XmlDataProcessor.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="241">
-              <caret line="39" column="78" selection-start-line="39" selection-start-column="78" selection-end-line="39" selection-end-column="78" />
+            <state relative-caret-position="221">
+              <caret line="19" column="49" selection-start-line="19" selection-start-column="49" selection-end-line="19" selection-end-column="49" />
               <folding>
-                <element signature="e#2590#2591#0" expanded="true" />
-                <element signature="e#2637#2638#0" expanded="true" />
+                <element signature="e#472#473#0" expanded="true" />
+                <element signature="e#528#529#0" expanded="true" />
+                <element signature="e#1614#1615#0" expanded="true" />
+                <element signature="e#1680#1681#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TaskPacket.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Common/src/Protocol/TaskPacket.java">
+      <file leaf-file-name="TaskProcessor.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/TaskProcessApplication/src/TaskProcessMainPackage/TaskProcessor.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="207">
-              <caret line="33" column="0" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
+            <state relative-caret-position="306">
+              <caret line="39" column="78" selection-start-line="39" selection-start-column="78" selection-end-line="39" selection-end-column="78" />
               <folding>
-                <element signature="e#691#692#0" expanded="true" />
-                <element signature="e#737#738#0" expanded="true" />
+                <element signature="e#2590#2591#0" expanded="true" />
+                <element signature="e#2637#2638#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -164,10 +175,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Common/src/TransportCommon/IDataReceivedListener.java" />
-        <option value="$PROJECT_DIR$/TaskProcessApplication/src/TaskProcessMainPackage/TaskProcessorFrame.java" />
-        <option value="$PROJECT_DIR$/Common/src/TransportCommon/TransporterSide.java" />
-        <option value="$PROJECT_DIR$/Common/src/Exceptions/SideOfTransporterNotRealized.java" />
         <option value="$PROJECT_DIR$/Common/src/Exceptions/SideOfTransporterNotRealizedException.java" />
         <option value="$PROJECT_DIR$/Transport/src/Transporter/UdpDataTransporter.java" />
         <option value="$PROJECT_DIR$/TaskProcessApplication/src/TaskProcessMainPackage/TaskProcessorThread.java" />
@@ -200,7 +207,6 @@
         <option value="$PROJECT_DIR$/Transport/src/Transporter/FakeTransporter.java" />
         <option value="$PROJECT_DIR$/Common/src/DataModel/MyTaskList.java" />
         <option value="$PROJECT_DIR$/Common/src/DataModel/TaskPriorityComparator.java" />
-        <option value="$PROJECT_DIR$/DataAccess/src/XmlDataAccess/XmlDataProcessor.java" />
         <option value="$PROJECT_DIR$/Common/src/DataModel/WorkingNodeState.java" />
         <option value="$PROJECT_DIR$/Common/src/Exceptions/TransporterIncorrectStateException.java" />
         <option value="$PROJECT_DIR$/Common/src/TransportCommon/IDataTransporter.java" />
@@ -209,12 +215,17 @@
         <option value="$PROJECT_DIR$/Transport/src/Transporter/ClientSideTransporterMock.java" />
         <option value="$PROJECT_DIR$/Core/src/CorePackage/WorkingNodesManager.java" />
         <option value="$PROJECT_DIR$/Core/src/CorePackage/WorkingNodeThread.java" />
-        <option value="$PROJECT_DIR$/Core/src/CorePackage/ProcessingWorkingNode.java" />
         <option value="$PROJECT_DIR$/TaskProcessApplication/src/TaskProcessMainPackage/Main.java" />
         <option value="$PROJECT_DIR$/Transport/src/Transporter/TcpDataTransporter.java" />
-        <option value="$PROJECT_DIR$/Core/src/CorePackage/Main.java" />
-        <option value="$PROJECT_DIR$/TaskProcessApplication/src/TaskProcessMainPackage/TaskManager.java" />
         <option value="$PROJECT_DIR$/TaskProcessApplication/src/TaskProcessMainPackage/TaskProcessor.java" />
+        <option value="$PROJECT_DIR$/Core/src/CorePackage/ProcessingWorkingNode.java" />
+        <option value="$PROJECT_DIR$/TaskProcessApplication/src/TaskProcessMainPackage/TaskManager.java" />
+        <option value="$PROJECT_DIR$/Core/src/CorePackage/Interfaces/IStartWorker.java" />
+        <option value="$PROJECT_DIR$/Core/src/CorePackage/WorkStarter.java" />
+        <option value="$PROJECT_DIR$/Common/src/DataProcessor/IDataAccessor.java" />
+        <option value="$PROJECT_DIR$/DataAccess/src/XmlDataAccess/XmlDataProcessor.java" />
+        <option value="$PROJECT_DIR$/Core/src/CorePackage/Main.java" />
+        <option value="$PROJECT_DIR$/Core/src/CorePackage/GUI/MainWindow.java" />
       </list>
     </option>
   </component>
@@ -579,7 +590,19 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Common" />
+              <option name="myItemId" value="Core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="CorePackage" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Interfaces" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -593,11 +616,19 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Common" />
+              <option name="myItemId" value="Core" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="CorePackage" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GUI" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -611,11 +642,15 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Common" />
+              <option name="myItemId" value="Core" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="CorePackage" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -634,14 +669,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="Common" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="DataModel" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -941,7 +968,7 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3319239" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3319239" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -951,7 +978,7 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.39429176" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39429176" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -981,12 +1008,6 @@
           <option name="timeStamp" value="75" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/Core/src/CorePackage/ProcessingWorkingNode.java</url>
-          <line>117</line>
-          <properties />
-          <option name="timeStamp" value="76" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/Transport/src/Transporter/ClientSideTransporterMock.java</url>
           <line>36</line>
           <properties />
@@ -1004,14 +1025,8 @@
           <properties />
           <option name="timeStamp" value="98" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/Core/src/CorePackage/ProcessingWorkingNode.java</url>
-          <line>115</line>
-          <properties />
-          <option name="timeStamp" value="104" />
-        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="105" />
+      <option name="time" value="106" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="Application">
@@ -1024,24 +1039,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Core/src/CorePackage/WorkingNodeSocket.java" />
-    <entry file="file://$PROJECT_DIR$/Core/src/CorePackage/Exceptions/WorkingNodeIsBusyException.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="55" selection-start-line="6" selection-start-column="55" selection-end-line="6" selection-end-column="55" />
-          <folding>
-            <element signature="e#218#219#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_102/src.zip!/java/lang/ProcessBuilder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="214" column="11" selection-start-line="214" selection-start-column="11" selection-end-line="214" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Core/src/CorePackage/Events/NodeStateChangedEvent.java" />
     <entry file="file://$PROJECT_DIR$/Core/src/CorePackage/Events/IWorkingNodeStateChangedListener.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -1054,13 +1051,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Core/src/CorePackage/ProcessingTask.java" />
-    <entry file="file://$PROJECT_DIR$/Common/src/DataProcessor/IDataAccessor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="9" column="23" selection-start-line="9" selection-start-column="23" selection-end-line="9" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/DataAccessFactory/src/DAF/DataAccessorCreator.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
@@ -1084,6 +1074,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="405">
           <caret line="67" column="25" selection-start-line="67" selection-start-column="25" selection-end-line="67" selection-end-column="25" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1203,6 +1194,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
           <caret line="9" column="7" selection-start-line="9" selection-start-column="7" selection-end-line="9" selection-end-column="7" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1309,14 +1301,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/DataAccess/src/XmlDataAccess/XmlDataProcessor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="241">
-          <caret line="26" column="0" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Transport/src/Transporter/FakeTransporter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-833">
@@ -1395,14 +1379,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Core/src/CorePackage/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="30" column="23" selection-start-line="30" selection-start-column="23" selection-end-line="30" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Core/src/CorePackage/WorkingNodesManager.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-748">
@@ -1434,7 +1410,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/TaskProcessApplication/src/TaskProcessMainPackage/TaskProcessor.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="241">
+        <state relative-caret-position="306">
           <caret line="39" column="78" selection-start-line="39" selection-start-column="78" selection-end-line="39" selection-end-column="78" />
           <folding>
             <element signature="e#2590#2591#0" expanded="true" />
@@ -1445,8 +1421,65 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/TaskProcessApplication/src/TaskProcessMainPackage/TaskManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="396">
-          <caret line="99" column="0" selection-start-line="99" selection-start-column="0" selection-end-line="99" selection-end-column="0" />
+        <state relative-caret-position="430">
+          <caret line="137" column="0" selection-start-line="137" selection-start-column="0" selection-end-line="137" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Core/src/CorePackage/Interfaces/IStartWorker.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="21" selection-start-line="7" selection-start-column="21" selection-end-line="7" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Common/src/DataProcessor/IDataAccessor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="9" column="20" selection-start-line="9" selection-start-column="20" selection-end-line="9" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DataAccess/src/XmlDataAccess/XmlDataProcessor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="19" column="49" selection-start-line="19" selection-start-column="49" selection-end-line="19" selection-end-column="49" />
+          <folding>
+            <element signature="e#472#473#0" expanded="true" />
+            <element signature="e#528#529#0" expanded="true" />
+            <element signature="e#1614#1615#0" expanded="true" />
+            <element signature="e#1680#1681#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Core/src/CorePackage/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="30" column="27" selection-start-line="30" selection-start-column="27" selection-end-line="30" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Core/src/CorePackage/GUI/MainWindow.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="578">
+          <caret line="34" column="0" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Core/src/CorePackage/WorkStarter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="476">
+          <caret line="33" column="0" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1455,8 +1488,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Core/src/CorePackage/ProcessingWorkingNode.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="173">
-          <caret line="117" column="0" selection-start-line="117" selection-start-column="0" selection-end-line="117" selection-end-column="0" />
+        <state relative-caret-position="258">
+          <caret line="120" column="0" selection-start-line="120" selection-start-column="0" selection-end-line="120" selection-end-column="0" />
           <folding />
         </state>
       </provider>

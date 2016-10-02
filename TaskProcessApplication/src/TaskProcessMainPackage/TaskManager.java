@@ -32,6 +32,7 @@ public class TaskManager implements Runnable, IDataReceivedListener, ITaskThread
     private JFrame _displayingFrame;
     JLabel _machineNameLabel;
     JLabel _taskDurationLabel;
+    JLabel _taskStateLabel;
 
     public TaskManager(int port) {
         _port = port;
@@ -63,7 +64,6 @@ public class TaskManager implements Runnable, IDataReceivedListener, ITaskThread
             switch (packet.GetPacketType()) {
                 case TaskPacketType.NewTask:
                     MyTask myTask = GetTaskInfoFromPacket(packet);
-                    ShowFrameIfItIsNotVisible();
                     try {
                         ProcessNewTask(myTask); // отдельный поток
                     } catch(StartTaskProcessException ex) {
@@ -82,12 +82,6 @@ public class TaskManager implements Runnable, IDataReceivedListener, ITaskThread
 
     }
 
-    private void ShowFrameIfItIsNotVisible() {
-        if (!_displayingFrame.isVisible()) {
-            _displayingFrame.setVisible(true);
-        }
-    }
-
     public void TaskThreadStateChanged(TaskThreadState previousState, TaskThreadState newState) {
         switch (newState) {
             case Idle:
@@ -97,7 +91,7 @@ public class TaskManager implements Runnable, IDataReceivedListener, ITaskThread
                         break;
                     case InProgress:
                         SendTaskCompleted();
-                        SetTaskInfoToFrame("",0);
+                        SetTaskInfoToFrame("Idle","",0);
                         break;
                 }
 
@@ -106,7 +100,7 @@ public class TaskManager implements Runnable, IDataReceivedListener, ITaskThread
                 switch (previousState) {
                     case Idle:
                     case Error:
-                        SetTaskInfoToFrame(_processor.GetCurrentTaskName(),_processor.GetCurrentTaskDuration());
+                        SetTaskInfoToFrame("In progress", _processor.GetCurrentTaskName(),_processor.GetCurrentTaskDuration());
                         SendTaskAck();
                         break;
                     case InProgress:
@@ -119,7 +113,7 @@ public class TaskManager implements Runnable, IDataReceivedListener, ITaskThread
                          break;
                     case Idle:
                     case InProgress:
-                        SetTaskInfoToFrame("Some Error Happened",0);
+                        SetTaskInfoToFrame("Error","Some Error Happened",0);
                         SendTaskError();
                         break;
                 }
@@ -132,16 +126,20 @@ public class TaskManager implements Runnable, IDataReceivedListener, ITaskThread
             _displayingFrame = new JFrame("Task Processor Frame");
             _displayingFrame.setSize(300,200);
             _displayingFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-            GridLayout grid = new GridLayout(2,1);
+            GridLayout grid = new GridLayout(3,1);
             _displayingFrame.setLayout(grid);
-            _machineNameLabel = new JLabel();
-            _taskDurationLabel = new JLabel();
+            _taskStateLabel = new JLabel("Current task State: Idle");
+            _machineNameLabel = new JLabel("Current Machine Name: ");
+            _taskDurationLabel = new JLabel("Current Task Duration: ");
+            _displayingFrame.add(_taskStateLabel);
             _displayingFrame.add(_machineNameLabel);
             _displayingFrame.add(_taskDurationLabel);
+            _displayingFrame.setVisible(true);
         }
     }
 
-    private void SetTaskInfoToFrame(String machineName, int taskDuration) {
+    private void SetTaskInfoToFrame(String taskState, String machineName, int taskDuration ) {
+        _taskStateLabel.setText("Current task State: " + taskState);
         _machineNameLabel.setText("Current Machine Name: " + machineName);
         _taskDurationLabel.setText("Current Task Duration: " +  taskDuration);
     }
