@@ -17,7 +17,8 @@ public class XmlDataProcessor implements IDataAccessor {
     private final String TASKS_LIST_FILE_NAME = "Tasks.xml";
 
     public MyTaskList GetAllTasks() {
-        return GetAllTasks(TASKS_LIST_FILE_NAME);
+        String parentDirectory = System.getProperty("user.dir");
+        return GetAllTasks(parentDirectory + "\\" + TASKS_LIST_FILE_NAME);
     }
     @Override
     public MyTaskList GetAllTasks(String filePath) {
@@ -48,7 +49,8 @@ public class XmlDataProcessor implements IDataAccessor {
     }
 
     public WorkingNodeList GetAllWorkingNodes() {
-        return GetAllWorkingNodes(WORKING_NODES_FILE_NAME);
+        String parentDirectory = System.getProperty("user.dir");
+        return GetAllWorkingNodes(parentDirectory +"\\" + WORKING_NODES_FILE_NAME);
     }
 
     @Override
