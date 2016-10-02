@@ -5,8 +5,7 @@ package TaskProcessMainPackage;
  */
 public class Main {
     public static void main(String[] args) {
-        //TaskManager taskProcessor = new TaskManager(Integer.decode(args[0]));
-        TaskManager taskProcessor = new TaskManager(123);
+        TaskManager taskProcessor = new TaskManager(Integer.decode(args[0]));
         Thread taskProcessorThread = new Thread(taskProcessor);
         taskProcessorThread.start();
     }

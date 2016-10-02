@@ -5,6 +5,7 @@ package DataModel;
  */
 public enum WorkingNodeState {
     Idle,
+    InitializingTask,
     WaitingTask,
     InProgress,
     Error

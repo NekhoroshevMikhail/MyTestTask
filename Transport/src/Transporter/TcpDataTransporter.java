@@ -1,6 +1,7 @@
 package Transporter;
 
 import Exceptions.SideOfTransporterNotRealizedException;
+import Exceptions.TransporterIncorrectStateException;
 import TransportCommon.IDataReceivedListener;
 import TransportCommon.IDataTransporter;
 import TransportCommon.TransporterSide;
@@ -85,8 +86,11 @@ public class TcpDataTransporter implements IDataTransporter {
     }
 
     @Override
-    public void SendPacket(byte[] data) {
+    public void SendPacket(byte[] data) throws TransporterIncorrectStateException {
         try {
+            if (_outputStream == null) {
+                throw new TransporterIncorrectStateException("Can not send data, because transporter has some errors");
+            }
             _outputStream.write(data, 0, data.length);
             _outputStream.flush();
         } catch (IOException e) {
@@ -120,6 +124,7 @@ public class TcpDataTransporter implements IDataTransporter {
                     _socket.setSoTimeout(1000);
                 } catch (SocketException e) {
                     e.printStackTrace();
+                    _isConnected = false;
                 }
                 while(_isConnected) {
                     byte[] buffer = new byte[1024];
@@ -136,6 +141,10 @@ public class TcpDataTransporter implements IDataTransporter {
                         }
                         catch (SocketTimeoutException ex) {
                             ex.printStackTrace();
+                        }
+                        catch (SocketException ex) {
+                            ex.printStackTrace();
+                            _isConnected = false;
                         }
                     } catch (IOException e) {
                         e.printStackTrace();

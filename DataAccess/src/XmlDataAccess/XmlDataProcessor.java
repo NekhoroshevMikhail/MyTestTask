@@ -26,9 +26,7 @@ public class XmlDataProcessor implements IDataAccessor {
             result = (MyTaskList) decoder.readObject();
             return result;
         } catch (FileNotFoundException ex) {
-
-            //todo: добавить логгер
-
+            ex.printStackTrace();
         }
         return null;
     }
@@ -42,9 +40,7 @@ public class XmlDataProcessor implements IDataAccessor {
             xmlEncoder.writeObject(listOfTasks);
             xmlEncoder.close();
         } catch (FileNotFoundException ex) {
-
-            //todo: добавить логгер
-
+            ex.printStackTrace();
         }
     }
 
@@ -58,9 +54,7 @@ public class XmlDataProcessor implements IDataAccessor {
             result = (WorkingNodeList) decoder.readObject();
             return result;
         } catch (FileNotFoundException ex) {
-
-            //todo: добавить логгер
-
+            ex.printStackTrace();
         }
         return null;
     }
@@ -75,9 +69,7 @@ public class XmlDataProcessor implements IDataAccessor {
             xmlEncoder.close();
 
         } catch (FileNotFoundException ex) {
-
-            //todo: добавить логгер
-
+            ex.printStackTrace();
         }
     }
 }

@@ -46,29 +46,43 @@ public class WorkingNodesManager implements IWorkingNodeStateChangedListener{
     }
 
     private void LetsManageTasks(){
+        ProcessingWorkingNode node = GetFirstNotBusyNode();
+        while(node != null) {
+            MyTask taskWithHighestPriority = GetMostUrgentTask();
+            if (taskWithHighestPriority != null) {
+                try {
+                    node.SetNewTask(taskWithHighestPriority);
+                } catch (WorkingNodeIsBusyException e) {
+                    e.printStackTrace();
+                }
+            }
+            else {
+                break;
+            }
+            node = GetFirstNotBusyNode();
+        }
+    }
+
+    private MyTask GetMostUrgentTask() {
+        MyTask result = null;
+        if (_listOfTasks.size() == 0) {
+            return null;
+        }
+
+        _listOfTasks.sort(new TaskPriorityComparator());
+        result = _listOfTasks.get(0);
+        _listOfTasks.remove(result);
+        return result;
+    }
+
+    private ProcessingWorkingNode GetFirstNotBusyNode(){
         for (int i =0; i < _processingNodes.size(); i++) {
             ProcessingWorkingNode node = _processingNodes.get(i);
-            try {
-                MyTask task = new MyTask();
-                try {
-                    task.setMinimumTaskTime(6);
-                    task.setMaximumTaskTime(10);
-                } catch (OutOfPossibleRangeException e) {
-                    e.printStackTrace();
-                } catch (IncorrectRangeException e) {
-                    e.printStackTrace();
-                }
-                try {
-                    task.setPriority((short)2);
-                } catch (BelowZeroException e) {
-                    e.printStackTrace();
-                }
-                node.SetNewTask(task);
-            } catch (WorkingNodeIsBusyException e) {
-                e.printStackTrace();
+            if (node.CanPerformNewTask()){
+                return node;
             }
-
         }
+        return null;
     }
 
     private void RunAllNodes() {
@@ -88,51 +102,4 @@ public class WorkingNodesManager implements IWorkingNodeStateChangedListener{
     public void WorkingNodeStateChanged(ProcessingWorkingNode sender, WorkingNodeState newState) {
         //todo: выдавать новое задание. не забыть лок
     }
-
-    /*private void RunNode(String name, String port) {
-        try {
-            ProcessBuilder pb = new ProcessBuilder("java", "-jar", "TaskProcessApplication.jar", name, port);
-            Process p = pb.start();
-            ConnectWithWorkingNode(port);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }*/
-
-    private void ConnectWithWorkingNode(int portOfNode){
-
-    }
-
-
-    private void ManageTasks() {
-        /*IDataTransporter transporter = null;
-        try {
-            transporter = TransporterCreator.CreateDataTransporter(PossibleTransport.Tcp, "localhost", 123, TransporterSide.Client);
-        } catch (TransorterNotRealizedExceptioin transorterNotRealizedExceptioin) {
-            transorterNotRealizedExceptioin.printStackTrace();
-        }
-        if (transporter != null) {
-            try {
-                transporter.TryConnect();
-                transporter.StartListenIncomingData();
-            } catch (SideOfTransporterNotRealizedException e) {
-                e.printStackTrace();
-            }
-            while(true) {
-                if (transporter.IsConnected()) {
-                    transporter.SendPacket(new byte[] {1,2,3});
-                }
-                try {
-                    Thread.sleep((long) 60000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-
-        }
-        transporter.Disconnect();*/
-
-    }
-
-
 }

@@ -7,6 +7,7 @@ import DataModel.WorkingNode;
 import DataModel.WorkingNodeState;
 import Exceptions.SideOfTransporterNotRealizedException;
 import Exceptions.TransorterNotRealizedExceptioin;
+import Exceptions.TransporterIncorrectStateException;
 import Factory.PossibleTransport;
 import Factory.TransporterCreator;
 import Protocol.Arguments.MachineNameArgumentBody;
@@ -17,6 +18,7 @@ import Protocol.TaskPacket;
 import TransportCommon.IDataReceivedListener;
 import TransportCommon.IDataTransporter;
 import TransportCommon.TransporterSide;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -33,8 +35,11 @@ public class ProcessingWorkingNode extends WorkingNode implements IDataReceivedL
     public ProcessingWorkingNode(WorkingNode node) {
         super(node);
         _currentTask = null;
-        _currentNodeState = WorkingNodeState.Idle;
         _listeners = new ArrayList<>();
+    }
+
+    public Boolean CanPerformNewTask(){
+        return _currentNodeState == WorkingNodeState.WaitingTask || _currentNodeState == WorkingNodeState.Idle;
     }
 
     public void Run(){
@@ -58,6 +63,7 @@ public class ProcessingWorkingNode extends WorkingNode implements IDataReceivedL
         try {
             ProcessBuilder pb = new ProcessBuilder("java", "-jar", "TaskProcessApplication.jar", Integer.toString(port));
             Process p = pb.start();
+            _currentNodeState = WorkingNodeState.Idle;
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -92,9 +98,8 @@ public class ProcessingWorkingNode extends WorkingNode implements IDataReceivedL
             throw new WorkingNodeIsBusyException("You can not set new task when working Node is Busy");
         }
         _currentTask = task;
+        _currentNodeState = WorkingNodeState.InitializingTask;
         PrepareAndSendPacketWithCurrentTask();
-        //_dataTransporter.SendPacket(new byte[] {1,2,3,4,5});
-
     }
 
     private void PrepareAndSendPacketWithCurrentTask() {
@@ -107,7 +112,13 @@ public class ProcessingWorkingNode extends WorkingNode implements IDataReceivedL
         packet.AddArgument(maximumDurationArgumentBody);
         packet.AddArgument(minimumDurationArgumentBody);
         byte[] dataForSend = packet.Serialize();
-        _dataTransporter.SendPacket(dataForSend);
+        try{
+            _dataTransporter.SendPacket(dataForSend);
+        }catch (TransporterIncorrectStateException ex) {
+            ex.printStackTrace();
+            _currentNodeState = WorkingNodeState.Idle;
+        }
+
     }
 
     public void StopCurrentTask() {
@@ -142,42 +153,23 @@ public class ProcessingWorkingNode extends WorkingNode implements IDataReceivedL
         TaskPacket taskCompletedAck = new TaskPacket();
         taskCompletedAck.SetType(TaskPacketType.TaskCompletedAck);
         byte[] dataForSend = taskCompletedAck.Serialize();
-        _dataTransporter.SendPacket(dataForSend);
+
+        try {
+            _dataTransporter.SendPacket(dataForSend);
+        } catch (TransporterIncorrectStateException e) {
+            e.printStackTrace();
+        }
     }
 
     private void SendTaskErrorAck() {
         TaskPacket taskCompletedAck = new TaskPacket();
         taskCompletedAck.SetType(TaskPacketType.TaskErrorAck);
         byte[] dataForSend = taskCompletedAck.Serialize();
-        _dataTransporter.SendPacket(dataForSend);
+        try {
+            _dataTransporter.SendPacket(dataForSend);
+        } catch (TransporterIncorrectStateException e) {
+            e.printStackTrace();
+        }
     }
 
 }
-
-
-    /*IDataTransporter transporter = null;
-        try {
-                transporter = TransporterCreator.CreateDataTransporter(PossibleTransport.Tcp, "localhost", 123, TransporterSide.Client);
-                } catch (TransorterNotRealizedExceptioin transorterNotRealizedExceptioin) {
-                transorterNotRealizedExceptioin.printStackTrace();
-                }
-                if (transporter != null) {
-                try {
-                transporter.TryConnect();
-                transporter.StartListenIncomingData();
-                } catch (SideOfTransporterNotRealizedException e) {
-                e.printStackTrace();
-                }
-                while(true) {
-                if (transporter.IsConnected()) {
-                transporter.SendPacket(new byte[] {1,2,3});
-                }
-                try {
-                Thread.sleep((long) 60000);
-                } catch (InterruptedException e) {
-                e.printStackTrace();
-                }
-                }
-
-                }
-                transporter.Disconnect();*/

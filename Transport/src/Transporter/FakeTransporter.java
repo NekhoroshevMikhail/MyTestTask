@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 /**
  * Created by nekho on 02-Oct-16.
- * This class created only for testing
+ * This class created for testing system. Testing logic is not completely realized.
  */
 public class FakeTransporter implements IDataTransporter {
 

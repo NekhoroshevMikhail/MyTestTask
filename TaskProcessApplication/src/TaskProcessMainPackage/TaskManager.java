@@ -19,6 +19,7 @@ import TransportCommon.IDataTransporter;
 import TransportCommon.TransporterSide;
 
 import javax.swing.*;
+import java.awt.*;
 import java.util.ArrayList;
 
 /**
@@ -42,7 +43,7 @@ public class TaskManager implements Runnable, IDataReceivedListener, ITaskThread
     @Override
     public void run() {
          try {
-            _dataTransporter = TransporterCreator.CreateDataTransporter(PossibleTransport.Fake, "localhost", _port, TransporterSide.Server);
+            _dataTransporter = TransporterCreator.CreateDataTransporter(PossibleTransport.Tcp, "localhost", _port, TransporterSide.Server);
             _dataTransporter.AddDataReceivedListener(this);
             _dataTransporter.TryConnect();
             _dataTransporter.StartListenIncomingData();
@@ -129,7 +130,10 @@ public class TaskManager implements Runnable, IDataReceivedListener, ITaskThread
     private void CreateFrame() {
         if (_displayingFrame == null) {
             _displayingFrame = new JFrame("Task Processor Frame");
+            _displayingFrame.setSize(300,200);
             _displayingFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+            GridLayout grid = new GridLayout(2,1);
+            _displayingFrame.setLayout(grid);
             _machineNameLabel = new JLabel();
             _taskDurationLabel = new JLabel();
             _displayingFrame.add(_machineNameLabel);
@@ -211,19 +215,31 @@ public class TaskManager implements Runnable, IDataReceivedListener, ITaskThread
     private void SendTaskCompleted() {
         TaskPacket taskAckPacket = new TaskPacket();
         taskAckPacket.SetType(TaskPacketType.TaskCompleted);
-        _dataTransporter.SendPacket(taskAckPacket.Serialize());
+        try {
+            _dataTransporter.SendPacket(taskAckPacket.Serialize());
+        } catch (TransporterIncorrectStateException e) {
+            e.printStackTrace();
+        }
     }
 
     private void SendTaskError() {
         TaskPacket taskAckPacket = new TaskPacket();
         taskAckPacket.SetType(TaskPacketType.TaskError);
-        _dataTransporter.SendPacket(taskAckPacket.Serialize());
+        try {
+            _dataTransporter.SendPacket(taskAckPacket.Serialize());
+        } catch (TransporterIncorrectStateException e) {
+            e.printStackTrace();
+        }
     }
 
     private void SendTaskAck() {
         TaskPacket taskAckPacket = new TaskPacket();
         taskAckPacket.SetType(TaskPacketType.NewTaskAck);
-        _dataTransporter.SendPacket(taskAckPacket.Serialize());
+        try {
+            _dataTransporter.SendPacket(taskAckPacket.Serialize());
+        } catch (TransporterIncorrectStateException e) {
+            e.printStackTrace();
+        }
     }
 
     private void Stop()

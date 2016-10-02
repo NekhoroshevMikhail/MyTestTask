@@ -1,6 +1,7 @@
 package TransportCommon;
 
 import Exceptions.SideOfTransporterNotRealizedException;
+import Exceptions.TransporterIncorrectStateException;
 
 import java.io.IOException;
 
@@ -11,7 +12,7 @@ public interface IDataTransporter {
     Boolean TryConnect() throws SideOfTransporterNotRealizedException;
     void Disconnect();
     void StartListenIncomingData();
-    void SendPacket(byte[] data);
+    void SendPacket(byte[] data) throws TransporterIncorrectStateException;
     void AddDataReceivedListener(IDataReceivedListener listener);
     void RemoveDataReceivedListener(IDataReceivedListener listener);
     Boolean IsConnected();

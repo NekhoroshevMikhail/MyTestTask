@@ -3,7 +3,9 @@ package Factory;
 import Exceptions.TransorterNotRealizedExceptioin;
 import TransportCommon.IDataTransporter;
 import TransportCommon.TransporterSide;
+import Transporter.ClientSideTransporterMock;
 import Transporter.FakeTransporter;
+import Transporter.ServerSideTransporterMock;
 import Transporter.TcpDataTransporter;
 
 /**
@@ -18,7 +20,13 @@ public class TransporterCreator {
             case Tcp:
                 return new TcpDataTransporter(address, port, side);
             case Fake:
-                return new FakeTransporter(address, port, side);
+                switch (side) {
+                    case Client:
+                        return new ClientSideTransporterMock();
+                    case Server:
+                        return new ServerSideTransporterMock();
+                }
+                return null;
             default:
                 throw new TransorterNotRealizedExceptioin("you must realize transporter");
         }
