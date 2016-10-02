@@ -18,7 +18,6 @@ import Protocol.TaskPacket;
 import TransportCommon.IDataReceivedListener;
 import TransportCommon.IDataTransporter;
 import TransportCommon.TransporterSide;
-import com.sun.org.apache.xpath.internal.operations.Bool;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -95,12 +94,11 @@ public class ProcessingWorkingNode extends WorkingNode implements IDataReceivedL
     }
 
     public void SetNewTask(MyTask task) throws WorkingNodeIsBusyException {
-        //if (GetCurrentState() != WorkingNodeState.Connected && GetCurrentState() != WorkingNodeState.WaitingNewTask) {
         if (!CanPerformNewTask()){
             throw new WorkingNodeIsBusyException("You can not set new task when working Node is Busy or not Initialized");
         }
         _currentTask = task;
-        SetNodeState(WorkingNodeState.InitializingTask);
+        _currentNodeState =WorkingNodeState.InitializingTask;
         PrepareAndSendPacketWithCurrentTask();
     }
 
@@ -142,7 +140,6 @@ public class ProcessingWorkingNode extends WorkingNode implements IDataReceivedL
     }
 
     @Override
-    //todo: измегить реализацию событий, чтобы они наружу не торчали.
     public void DataReceived(byte[] data) {
         TaskPacket receivedPacket = new TaskPacket();
         receivedPacket.Parse(data);

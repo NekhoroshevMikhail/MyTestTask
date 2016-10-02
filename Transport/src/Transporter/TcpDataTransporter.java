@@ -138,10 +138,8 @@ public class TcpDataTransporter implements IDataTransporter {
                                 bytesReadedFromStream++;
                             }
                         }catch (EOFException ex) {
-                            ex.printStackTrace();
                         }
                         catch (SocketTimeoutException ex) {
-                            ex.printStackTrace();
                         }
                         catch (SocketException ex) {
                             ex.printStackTrace();
