@@ -8,14 +8,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1373aae4-2340-4c97-bddc-4d88024d8786" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Core/src/CorePackage/GUI/MainWindow.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Core/src/CorePackage/Interfaces/IStartWorker.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Core/src/CorePackage/WorkStarter.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Common/src/DataProcessor/IDataAccessor.java" afterPath="$PROJECT_DIR$/Common/src/DataProcessor/IDataAccessor.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Core/src/CorePackage/Main.java" afterPath="$PROJECT_DIR$/Core/src/CorePackage/Main.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/DataAccess/src/XmlDataAccess/XmlDataProcessor.java" afterPath="$PROJECT_DIR$/DataAccess/src/XmlDataAccess/XmlDataProcessor.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/DataAccessFactory/src/DAF/DataAccessorCreator.java" afterPath="$PROJECT_DIR$/DataAccessFactory/src/DAF/DataAccessorCreator.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Core/src/CorePackage/GUI/MainWindow.java" afterPath="$PROJECT_DIR$/Core/src/CorePackage/GUI/MainWindow.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TaskProcessApplication/src/TaskProcessMainPackage/TaskManager.java" afterPath="$PROJECT_DIR$/TaskProcessApplication/src/TaskProcessMainPackage/TaskManager.java" />
     </list>
     <ignored path="MyTestTask.iws" />
@@ -37,11 +31,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="ProcessingWorkingNode.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ProcessingWorkingNode.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Core/src/CorePackage/ProcessingWorkingNode.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="258">
-              <caret line="120" column="0" selection-start-line="120" selection-start-column="0" selection-end-line="120" selection-end-column="0" />
+            <state relative-caret-position="224">
+              <caret line="118" column="44" selection-start-line="118" selection-start-column="44" selection-end-line="118" selection-end-column="44" />
               <folding />
             </state>
           </provider>
@@ -89,11 +83,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TaskManager.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="TaskManager.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/TaskProcessApplication/src/TaskProcessMainPackage/TaskManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="430">
-              <caret line="137" column="0" selection-start-line="137" selection-start-column="0" selection-end-line="137" selection-end-column="0" />
+            <state relative-caret-position="277">
+              <caret line="128" column="55" selection-start-line="128" selection-start-column="55" selection-end-line="128" selection-end-column="55" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -104,8 +98,8 @@
       <file leaf-file-name="MainWindow.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Core/src/CorePackage/GUI/MainWindow.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="578">
-              <caret line="34" column="0" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
+            <state relative-caret-position="340">
+              <caret line="20" column="36" selection-start-line="20" selection-start-column="36" selection-end-line="20" selection-end-column="36" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -219,13 +213,13 @@
         <option value="$PROJECT_DIR$/Transport/src/Transporter/TcpDataTransporter.java" />
         <option value="$PROJECT_DIR$/TaskProcessApplication/src/TaskProcessMainPackage/TaskProcessor.java" />
         <option value="$PROJECT_DIR$/Core/src/CorePackage/ProcessingWorkingNode.java" />
-        <option value="$PROJECT_DIR$/TaskProcessApplication/src/TaskProcessMainPackage/TaskManager.java" />
         <option value="$PROJECT_DIR$/Core/src/CorePackage/Interfaces/IStartWorker.java" />
         <option value="$PROJECT_DIR$/Core/src/CorePackage/WorkStarter.java" />
         <option value="$PROJECT_DIR$/Common/src/DataProcessor/IDataAccessor.java" />
         <option value="$PROJECT_DIR$/DataAccess/src/XmlDataAccess/XmlDataProcessor.java" />
         <option value="$PROJECT_DIR$/Core/src/CorePackage/Main.java" />
         <option value="$PROJECT_DIR$/Core/src/CorePackage/GUI/MainWindow.java" />
+        <option value="$PROJECT_DIR$/TaskProcessApplication/src/TaskProcessMainPackage/TaskManager.java" />
       </list>
     </option>
   </component>
@@ -1419,16 +1413,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/TaskProcessApplication/src/TaskProcessMainPackage/TaskManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="430">
-          <caret line="137" column="0" selection-start-line="137" selection-start-column="0" selection-end-line="137" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Core/src/CorePackage/Interfaces/IStartWorker.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
@@ -1466,16 +1450,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Core/src/CorePackage/GUI/MainWindow.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="578">
-          <caret line="34" column="0" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Core/src/CorePackage/WorkStarter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="476">
@@ -1488,9 +1462,29 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Core/src/CorePackage/ProcessingWorkingNode.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="258">
-          <caret line="120" column="0" selection-start-line="120" selection-start-column="0" selection-end-line="120" selection-end-column="0" />
+        <state relative-caret-position="224">
+          <caret line="118" column="44" selection-start-line="118" selection-start-column="44" selection-end-line="118" selection-end-column="44" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Core/src/CorePackage/GUI/MainWindow.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="20" column="36" selection-start-line="20" selection-start-column="36" selection-end-line="20" selection-end-column="36" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TaskProcessApplication/src/TaskProcessMainPackage/TaskManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="277">
+          <caret line="128" column="55" selection-start-line="128" selection-start-column="55" selection-end-line="128" selection-end-column="55" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

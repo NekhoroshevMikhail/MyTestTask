@@ -18,6 +18,7 @@ public class MainWindow extends JFrame {
         setLayout(null);
         pack();
         setSize(300,200);
+        setLocationRelativeTo(null);
         Container pane = getContentPane();
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         JButton button = new JButton();

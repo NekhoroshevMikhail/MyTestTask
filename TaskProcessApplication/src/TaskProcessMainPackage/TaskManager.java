@@ -126,6 +126,7 @@ public class TaskManager implements Runnable, IDataReceivedListener, ITaskThread
             _displayingFrame = new JFrame("Task Processor Frame");
             _displayingFrame.setSize(300,200);
             _displayingFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+            _displayingFrame.setLocationByPlatform(true);
             GridLayout grid = new GridLayout(3,1);
             _displayingFrame.setLayout(grid);
             _taskStateLabel = new JLabel("Current task State: Idle");
