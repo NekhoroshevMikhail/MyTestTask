@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.Dictionary;
 import java.util.HashSet;
 
+import static DataModel.WorkingNodeState.*;
+
 /**
  * Created by nekho on 29-Sep-16.
  */
@@ -20,7 +22,6 @@ public class WorkingNodesManager implements IWorkingNodeStateChangedListener{
     private ArrayList<ProcessingWorkingNode> _processingNodes;
     private MyTaskList _listOfTasks;
     private Boolean _isStarted;
-
 
     public WorkingNodesManager(WorkingNodeList nodesToRun, MyTaskList listOfTasks)
     {
@@ -100,6 +101,11 @@ public class WorkingNodesManager implements IWorkingNodeStateChangedListener{
 
     @Override
     public void WorkingNodeStateChanged(ProcessingWorkingNode sender, WorkingNodeState newState) {
-        //todo: выдавать новое задание. не забыть лок
+        switch (newState){
+            case Connected:
+            case WaitingNewTask:
+                LetsManageTasks();
+                break;
+        }
     }
 }

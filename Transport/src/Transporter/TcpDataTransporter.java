@@ -76,6 +76,7 @@ public class TcpDataTransporter implements IDataTransporter {
     @Override
     public void Disconnect() {
         try{
+            System.out.println("Transporter disconnects!!!");
             _inputStream.close();
             _outputStream.close();
             _socket.close();
@@ -89,7 +90,7 @@ public class TcpDataTransporter implements IDataTransporter {
     public void SendPacket(byte[] data) throws TransporterIncorrectStateException {
         try {
             if (_outputStream == null) {
-                throw new TransporterIncorrectStateException("Can not send data, because transporter has some errors");
+                throw new TransporterIncorrectStateException("Can not send data, because output stream is null");
             }
             _outputStream.write(data, 0, data.length);
             _outputStream.flush();

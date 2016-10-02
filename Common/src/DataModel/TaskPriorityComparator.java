@@ -10,13 +10,13 @@ public class TaskPriorityComparator implements Comparator<MyTask> {
     public int compare(MyTask firstTask, MyTask secondTask) {
 
         if (firstTask.getPriority() > secondTask.getPriority()){
-            return 1;
+            return -1;
         }
 
         if (firstTask.getPriority() == secondTask.getPriority()){
             return 0;
         }
 
-        return -1;
+        return 1;
     }
 }
