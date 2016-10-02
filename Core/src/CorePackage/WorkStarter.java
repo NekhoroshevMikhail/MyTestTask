@@ -1,5 +1,6 @@
 package CorePackage;
 
+import CorePackage.Events.IWorkFinishedListener;
 import CorePackage.Interfaces.IStartWorker;
 import DAF.AvailableDataFormats;
 import DAF.DataAccessorCreator;
@@ -30,10 +31,11 @@ public class WorkStarter implements IStartWorker {
         manager.StartWork();
     }
 
-    public void StartWork() {
+    public void StartWork(IWorkFinishedListener workFinishedListener) {
         IDataAccessor accessor = GetDataAccessor();
 
         WorkingNodesManager manager = new WorkingNodesManager(accessor.GetAllWorkingNodes(), accessor.GetAllTasks());
         manager.StartWork();
+        manager.AddWorkFinishedListener(workFinishedListener);
     }
 }

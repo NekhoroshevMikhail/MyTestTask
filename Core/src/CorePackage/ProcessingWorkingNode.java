@@ -30,9 +30,13 @@ public class ProcessingWorkingNode extends WorkingNode implements IDataReceivedL
     private MyTask _currentTask;
     private WorkingNodeState _currentNodeState;
     private ArrayList<IWorkingNodeStateChangedListener> _listeners;
+    private static int _id = 0;
+    private int nodeId;
 
     public ProcessingWorkingNode(WorkingNode node) {
         super(node);
+        nodeId = _id;
+        _id++;
         _currentTask = null;
         _listeners = new ArrayList<>();
     }
@@ -69,6 +73,7 @@ public class ProcessingWorkingNode extends WorkingNode implements IDataReceivedL
     }
 
     private void ConnectAndCreateTransporter() {
+        Log("ConnectAndCreateTransporter");
         IDataTransporter transporter = null;
         try {
             transporter = TransporterCreator.CreateDataTransporter(PossibleTransport.Tcp, "localhost", port, TransporterSide.Client);
@@ -88,13 +93,20 @@ public class ProcessingWorkingNode extends WorkingNode implements IDataReceivedL
         _currentNodeState = WorkingNodeState.Connected;
     }
 
+    private void Log(String logMessage) {
+        //System.out.println("ProcessingWorkingNode" + _id + " " + logMessage);
+    }
+
     public void Stop() {
+        Log("Stop");
         _dataTransporter.Disconnect();
         SetNodeState(WorkingNodeState.Idle);
     }
 
     public void SetNewTask(MyTask task) throws WorkingNodeIsBusyException {
+        Log("SetNewTask");
         if (!CanPerformNewTask()){
+            Log("!CanPerformNewTask()");
             throw new WorkingNodeIsBusyException("You can not set new task when working Node is Busy or not Initialized");
         }
         _currentTask = task;
@@ -103,10 +115,12 @@ public class ProcessingWorkingNode extends WorkingNode implements IDataReceivedL
     }
 
     private WorkingNodeState GetCurrentState(){
+        Log("GetCurrentState");
         return _currentNodeState;
     }
 
     private void SetNodeState(WorkingNodeState newState) {
+        Log("SetNodeState -> "+ newState);
         _currentNodeState = newState;
         synchronized (_listeners)
         {
@@ -117,6 +131,7 @@ public class ProcessingWorkingNode extends WorkingNode implements IDataReceivedL
     }
 
     private void PrepareAndSendPacketWithCurrentTask() {
+        Log("PrepareAndSendPacketWithCurrentTask, " + _currentTask.getName());
         TaskPacket packet = new TaskPacket();
         packet.SetType(TaskPacketType.NewTask);
         MachineNameArgumentBody machineName = new MachineNameArgumentBody(_currentTask.getName());
@@ -127,8 +142,10 @@ public class ProcessingWorkingNode extends WorkingNode implements IDataReceivedL
         packet.AddArgument(minimumDurationArgumentBody);
         byte[] dataForSend = packet.Serialize();
         try{
+            Log("_dataTransporter.SendPacket(dataForSend); ");
             _dataTransporter.SendPacket(dataForSend);
         }catch (TransporterIncorrectStateException ex) {
+            Log("TransporterIncorrectStateException ex " + ex.getMessage() + ex.getStackTrace());
             ex.printStackTrace();
             SetNodeState(WorkingNodeState.Idle);
         }
@@ -141,26 +158,34 @@ public class ProcessingWorkingNode extends WorkingNode implements IDataReceivedL
 
     @Override
     public void DataReceived(byte[] data) {
+        Log("DataReceived ");
         TaskPacket receivedPacket = new TaskPacket();
         receivedPacket.Parse(data);
 
         if (receivedPacket.IsCorrect()) {
+            Log("receivedPacket.IsCorrect()");
             switch (receivedPacket.GetPacketType())
             {
                 case TaskPacketType.NewTaskAck:
+                    Log("TaskPacketType.NewTaskAck");
                     SetNodeState(WorkingNodeState.InProgress);
                     break;
                 case TaskPacketType.TaskCompleted:
+                    Log("TaskPacketType.TaskCompleted");
                     try {
+                        Log("SendTaskCompletedAck();");
                         SendTaskCompletedAck();
                     } catch (TransporterIncorrectStateException e) {
+                        Log("TransporterIncorrectStateException e");
                         e.printStackTrace();
                         SetNodeState(WorkingNodeState.Error);
                         return;
                     }
+                    Log("SetNodeState(WorkingNodeState.WaitingNewTask);");
                     SetNodeState(WorkingNodeState.WaitingNewTask);
                     break;
                 case TaskPacketType.TaskError:
+                    Log("TaskPacketType.TaskError");
                     try {
                         SendTaskErrorAck();
                     } catch (TransporterIncorrectStateException e) {

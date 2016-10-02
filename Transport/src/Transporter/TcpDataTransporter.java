@@ -26,13 +26,24 @@ public class TcpDataTransporter implements IDataTransporter {
     private DataOutputStream _outputStream;
     private Boolean _isConnected;
     private ArrayList<IDataReceivedListener> _listeners;
+    private int _id;
+    private static int _storedId = 0;
+    private Object _lockObject;
 
     public TcpDataTransporter(String address, int port, TransporterSide whereTransporterCreated) {
+        _lockObject = new Object();
         _address = address;
         _port = port;
         _createdSide = whereTransporterCreated;
         _isConnected = false;
         _listeners = new ArrayList<IDataReceivedListener>();
+        _id = _storedId;
+        _storedId++;
+    }
+
+    private void Log(String message)
+    {
+        //System.out.println("TcpTR"+_id +" " + message);
     }
 
     public Boolean IsConnected(){
@@ -43,19 +54,23 @@ public class TcpDataTransporter implements IDataTransporter {
     public Boolean TryConnect()
             throws SideOfTransporterNotRealizedException
         {
+        Log("TryConnect");
         switch (_createdSide) {
             case Client:
                 try {
+                    Log("case Client:");
                     _socket = new Socket(InetAddress.getByName(_address), _port);
                     _inputStream = new DataInputStream(_socket.getInputStream());
                     _outputStream = new DataOutputStream(_socket.getOutputStream());
                     _isConnected = true;
                 }catch (IOException ex) {
+                    Log("IOException ex");
                     ex.printStackTrace();
                 }
                 break;
             case Server:
                 try{
+                    Log("case Server:");
                     ServerSocket serverSocket = new ServerSocket(_port);
 
                     serverSocket.setSoTimeout(SOCKET_ACCEPT_TIMEOUT);
@@ -64,19 +79,21 @@ public class TcpDataTransporter implements IDataTransporter {
                     _outputStream = new DataOutputStream(_socket.getOutputStream());
                     _isConnected = true;
                 }catch (IOException ex) {
+                    Log("IOException ex");
                    ex.printStackTrace();
                 }
                 break;
             default:
                 throw new SideOfTransporterNotRealizedException("You must realize creation of this transporter on new way");
         }
+        Log("TryConnect finish");
         return _isConnected;
     }
 
     @Override
     public void Disconnect() {
+        Log("Disconnect()");
         try{
-            System.out.println("Transporter disconnects!!!");
             _inputStream.close();
             _outputStream.close();
             _socket.close();
@@ -86,17 +103,39 @@ public class TcpDataTransporter implements IDataTransporter {
         _isConnected = false;
     }
 
+    public static String byteArrayToHex(byte[] a) {
+        StringBuilder sb = new StringBuilder(a.length * 2);
+        for(byte b: a)
+            sb.append("0x" + String.format("%02x", b & 0xff)+", ");
+        return sb.toString();
+    }
+
     @Override
     public void SendPacket(byte[] data) throws TransporterIncorrectStateException {
-        try {
-            if (_outputStream == null) {
-                throw new TransporterIncorrectStateException("Can not send data, because output stream is null");
+        Log("SendPacket()");
+        synchronized (_lockObject) {
+            try {
+                if (_outputStream == null) {
+                    Log("_outputStream == null");
+                    throw new TransporterIncorrectStateException("Can not send data, because output stream is null");
+                }
+                Log("Send data - " + byteArrayToHex(data));
+                _outputStream.write(data, 0, data.length);
+                _outputStream.flush();
+
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+            } catch (IOException e) {
+                Log("catch (IOException e)");
+                e.printStackTrace();
+                Log(e.getMessage());
             }
-            _outputStream.write(data, 0, data.length);
-            _outputStream.flush();
-        } catch (IOException e) {
-            e.printStackTrace();
         }
+
     }
 
     @Override
@@ -118,11 +157,12 @@ public class TcpDataTransporter implements IDataTransporter {
     }
 
     public void StartListenIncomingData(){
+        Log("StartListenIncomingData");
         Thread listenDataThread = new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
-                    _socket.setSoTimeout(1000);
+                    _socket.setSoTimeout(50);
                 } catch (SocketException e) {
                     e.printStackTrace();
                     _isConnected = false;
@@ -138,19 +178,24 @@ public class TcpDataTransporter implements IDataTransporter {
                                 bytesReadedFromStream++;
                             }
                         }catch (EOFException ex) {
+                            Log("StartListenIncomingData - EOFException ex");
                         }
                         catch (SocketTimeoutException ex) {
+                            Log("StartListenIncomingData - SocketTimeoutException ex");
                         }
                         catch (SocketException ex) {
+                            Log("StartListenIncomingData - SocketException ex");
                             ex.printStackTrace();
                             _isConnected = false;
                         }
                     } catch (IOException e) {
+                        Log("StartListenIncomingData - IOException e");
                         e.printStackTrace();
                         continue;
                     }
 
                     if (bytesReadedFromStream > 0) {
+                        Log("StartListenIncomingData - bytesReadedFromStream > 0");
                         byte[] receivedData = new byte[bytesReadedFromStream];
                         System.arraycopy(buffer, 0, receivedData, 0, bytesReadedFromStream);
                         synchronized (_listeners) {

@@ -1,5 +1,6 @@
 package CorePackage;
 
+import CorePackage.Events.IWorkFinishedListener;
 import CorePackage.Events.IWorkingNodeStateChangedListener;
 import CorePackage.Exceptions.WorkingNodeIsBusyException;
 import DataModel.*;
@@ -22,6 +23,7 @@ public class WorkingNodesManager implements IWorkingNodeStateChangedListener{
     private ArrayList<ProcessingWorkingNode> _processingNodes;
     private MyTaskList _listOfTasks;
     private Boolean _isStarted;
+    private ArrayList<IWorkFinishedListener> _listeners;
 
     public WorkingNodesManager(WorkingNodeList nodesToRun, MyTaskList listOfTasks)
     {
@@ -29,6 +31,7 @@ public class WorkingNodesManager implements IWorkingNodeStateChangedListener{
         FillProcessingNodesList(nodesToRun);
         _listOfTasks = listOfTasks;
         _isStarted = false;
+        _listeners = new ArrayList<>();
     }
 
     public void StartWork() {
@@ -107,5 +110,32 @@ public class WorkingNodesManager implements IWorkingNodeStateChangedListener{
                 LetsManageTasks();
                 break;
         }
+        Thread checkWorkFinishedThread = new Thread(
+                new Runnable() {
+                    @Override
+                    public void run() {
+                        if (_listOfTasks.size() == 0 && AllNodesFree()) {
+                            for (IWorkFinishedListener listener :  _listeners) {
+                                listener.WorkFinished();
+                            }
+                        }
+                    }
+                }
+        );
+        checkWorkFinishedThread.start();
+
+    }
+
+    private boolean AllNodesFree() {
+        for(ProcessingWorkingNode node : _processingNodes) {
+            if (!node.CanPerformNewTask()){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public void AddWorkFinishedListener(IWorkFinishedListener workFinishedListener) {
+        _listeners.add(workFinishedListener);
     }
 }

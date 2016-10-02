@@ -20,6 +20,7 @@ import TransportCommon.TransporterSide;
 
 import javax.swing.*;
 import java.awt.*;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 /**
@@ -33,9 +34,13 @@ public class TaskManager implements Runnable, IDataReceivedListener, ITaskThread
     JLabel _machineNameLabel;
     JLabel _taskDurationLabel;
     JLabel _taskStateLabel;
+    private static int _id = 0;
+    private int _logId;
 
     public TaskManager(int port) {
         _port = port;
+        _logId = _id;
+        _id++;
         _processor = new TaskProcessor();
         _processor.AddTaskStateChangedListener(this);
         CreateFrame();
@@ -55,18 +60,35 @@ public class TaskManager implements Runnable, IDataReceivedListener, ITaskThread
         }
     }
 
+    private void Log(String logMessage) {
+        //System.out.println("TaskManager"+_logId+ " " + logMessage);
+    }
+
+    public static String byteArrayToHex(byte[] a) {
+        StringBuilder sb = new StringBuilder(a.length * 2);
+        for(byte b: a)
+            sb.append("0x" + String.format("%02x", b & 0xff)+", ");
+        return sb.toString();
+    }
+
     @Override
     public void DataReceived(byte[] data) {
+        Log("DataReceived");
+        Log("data - " + byteArrayToHex(data));
         TaskPacket packet = new TaskPacket();
         packet.Parse(data);
 
         if (packet.IsCorrect()) {
+            Log("(packet.IsCorrect())");
             switch (packet.GetPacketType()) {
                 case TaskPacketType.NewTask:
+                    Log("TaskPacketType.NewTask");
                     MyTask myTask = GetTaskInfoFromPacket(packet);
                     try {
-                        ProcessNewTask(myTask); // отдельный поток
+                        Log("ProcessNewTask(myTask); " + myTask.getName());
+                        ProcessNewTask(myTask);
                     } catch(StartTaskProcessException ex) {
+                        Log("StartTaskProcessException ex ");
                         ex.printStackTrace();
                         SendTaskError();
                         return;
@@ -74,12 +96,13 @@ public class TaskManager implements Runnable, IDataReceivedListener, ITaskThread
                     SendTaskAck();
                     break;
                 case TaskPacketType.TaskCompletedAck:
+                    Log("TaskPacketType.TaskCompletedAck");
                     break;
                 case TaskPacketType.TaskErrorAck:
+                    Log("TaskPacketType.TaskCompletedAck");
                     break;
             }
         }
-
     }
 
     public void TaskThreadStateChanged(TaskThreadState previousState, TaskThreadState newState) {
@@ -146,21 +169,27 @@ public class TaskManager implements Runnable, IDataReceivedListener, ITaskThread
     }
 
     private void ProcessNewTask(MyTask myTask) throws StartTaskProcessException {
+        Log("ProcessNewTask");
         if (myTask == null) {
+            Log("if (myTask == null) {");
             throw new StartTaskProcessException("impossible to start incorrect Task");
         }
         if (_processor.GetCurrentState() != TaskThreadState.Idle) {
+            Log("if (_processor.GetCurrentState() != TaskThreadState.Idle) {");
             throw new StartTaskProcessException("impossible to start Task, because some task is performing");
         }
 
         try {
+            Log("_processor.SetTask(myTask);");
             _processor.SetTask(myTask);
         } catch (ArgumentNullException e) {
+            Log("ArgumentNullException e");
             e.printStackTrace();
         }
 
         Thread taskProcessThread = new Thread(_processor);
         taskProcessThread.start();
+        Log("taskProcessThread.start();");
     }
 
 
