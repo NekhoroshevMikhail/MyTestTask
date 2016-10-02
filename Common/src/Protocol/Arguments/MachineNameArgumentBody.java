@@ -16,6 +16,10 @@ public class MachineNameArgumentBody implements IPacketArgument{
         return TaskPacketArgumentType.MachineNameArgument;
     }
 
+    public String GetName() {
+        return _name;
+    }
+
     public MachineNameArgumentBody() {
     }
 

@@ -17,7 +17,6 @@ import Protocol.TaskPacket;
 import TransportCommon.IDataReceivedListener;
 import TransportCommon.IDataTransporter;
 import TransportCommon.TransporterSide;
-import com.sun.org.apache.xpath.internal.operations.Bool;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -57,7 +56,7 @@ public class ProcessingWorkingNode extends WorkingNode implements IDataReceivedL
 
     private void RunWorkingNode() {
         try {
-            ProcessBuilder pb = new ProcessBuilder("java", "-jar", "TaskProcessApplication.jar", name, Integer.toString(port));
+            ProcessBuilder pb = new ProcessBuilder("java", "-jar", "TaskProcessApplication.jar", Integer.toString(port));
             Process p = pb.start();
         } catch (IOException e) {
             e.printStackTrace();
@@ -121,7 +120,7 @@ public class ProcessingWorkingNode extends WorkingNode implements IDataReceivedL
         TaskPacket receivedPacket = new TaskPacket();
         receivedPacket.Parse(data);
 
-        if (receivedPacket.IsPacketCorrect()) {
+        if (receivedPacket.IsCorrect()) {
             switch (receivedPacket.GetPacketType())
             {
                 case TaskPacketType.NewTaskAck:

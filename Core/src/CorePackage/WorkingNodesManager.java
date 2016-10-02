@@ -4,6 +4,8 @@ import CorePackage.Events.IWorkingNodeStateChangedListener;
 import CorePackage.Exceptions.WorkingNodeIsBusyException;
 import DataModel.*;
 import Exceptions.BelowZeroException;
+import Exceptions.IncorrectRangeException;
+import Exceptions.OutOfPossibleRangeException;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -48,8 +50,14 @@ public class WorkingNodesManager implements IWorkingNodeStateChangedListener{
             ProcessingWorkingNode node = _processingNodes.get(i);
             try {
                 MyTask task = new MyTask();
-                task.setMinimumTaskTime((short)6);
-                task.setMaximumTaskTime((short)10);
+                try {
+                    task.setMinimumTaskTime(6);
+                    task.setMaximumTaskTime(10);
+                } catch (OutOfPossibleRangeException e) {
+                    e.printStackTrace();
+                } catch (IncorrectRangeException e) {
+                    e.printStackTrace();
+                }
                 try {
                     task.setPriority((short)2);
                 } catch (BelowZeroException e) {
@@ -78,7 +86,7 @@ public class WorkingNodesManager implements IWorkingNodeStateChangedListener{
 
     @Override
     public void WorkingNodeStateChanged(ProcessingWorkingNode sender, WorkingNodeState newState) {
-
+        //todo: выдавать новое задание. не забыть лок
     }
 
     /*private void RunNode(String name, String port) {

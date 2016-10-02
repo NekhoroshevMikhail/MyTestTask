@@ -5,5 +5,6 @@ package Factory;
  */
 public enum PossibleTransport {
     Tcp,
-    Udp
+    Udp,
+    Fake
 }

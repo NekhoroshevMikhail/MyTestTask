@@ -15,6 +15,10 @@ public class MaximumDurationArgumentBody implements IPacketArgument {
         return TaskPacketArgumentType.MaximumDurationArgument;
     }
 
+    public int GetMaximumDuration() {
+        return _maximumDuration;
+    }
+
     public MaximumDurationArgumentBody() {
     }
 

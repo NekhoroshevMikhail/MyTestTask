@@ -4,7 +4,6 @@ import Exceptions.BelowZeroException;
 import Exceptions.EmptyNameException;
 import Exceptions.IncorrectRangeException;
 import Exceptions.OutOfPossibleRangeException;
-import com.sun.org.apache.xpath.internal.operations.Bool;
 
 /**
  * Created by nekho on 27-Sep-16.
@@ -12,20 +11,20 @@ import com.sun.org.apache.xpath.internal.operations.Bool;
 public class MyTask {
 
     private final String DEFAULT_TASK_NAME = "DefaultTaskName";
-    private final short POSSIBLE_MINIMUM_TASK_TIME = 5;
-    private final short POSSIBLE_MAXIMUM_TASK_TIME = 25;
-    private final short DEFAULT_PRIORITY = 0;
+    private final int POSSIBLE_MINIMUM_TASK_TIME = 5;
+    private final int POSSIBLE_MAXIMUM_TASK_TIME = 25;
+    private final int DEFAULT_PRIORITY = 0;
 
 
     private String _name;
-    private short _priority;
-    private short _minimummTaskTime;
-    private short _maximumTaskTime;
+    private int _priority;
+    private int _minimumTaskTime;
+    private int _maximumTaskTime;
 
     public MyTask() {
         _name = DEFAULT_TASK_NAME;
         _priority = DEFAULT_PRIORITY;
-        _minimummTaskTime = POSSIBLE_MINIMUM_TASK_TIME;
+        _minimumTaskTime = POSSIBLE_MINIMUM_TASK_TIME;
         _maximumTaskTime = POSSIBLE_MAXIMUM_TASK_TIME;
     }
 
@@ -42,11 +41,11 @@ public class MyTask {
         _name = value;
     }
 
-    public short getPriority() {
+    public int getPriority() {
         return _priority;
     }
 
-    public void setPriority(short value)
+    public void setPriority(int value)
             throws BelowZeroException
     {
         if (value < 0) {
@@ -55,46 +54,40 @@ public class MyTask {
         _priority = value;
     }
 
-    public short getMinimumTaskTime()
+    public int getMinimumTaskTime()
     {
-        return _minimummTaskTime;
+        return _minimumTaskTime;
     }
 
-    public void setMinimumTaskTime(short value) {
-        _minimummTaskTime = value;
-    }
-
-    /*public void setMinimumTaskTime(short value)
+    public void setMinimumTaskTime(int value)
             throws OutOfPossibleRangeException, IncorrectRangeException
     {
         if (IsValueInAvailableRange(value)) {
             if (value > _maximumTaskTime) {
                 throw new IncorrectRangeException("minimum value of task time can not be more, then maximum value");
             }
-            _minimummTaskTime = value;
+            _minimumTaskTime = value;
         }
-    }*/
+    }
 
-    public short getMaximumTaskTime() {
+    public int getMaximumTaskTime()
+    {
         return _maximumTaskTime;
     }
 
-    public void setMaximumTaskTime(short value) {
-        _maximumTaskTime = value;
-    }
-/*    public void setMaximumTaskTime(short value)
+    public void setMaximumTaskTime(int value)
         throws OutOfPossibleRangeException, IncorrectRangeException
     {
         if (IsValueInAvailableRange(value)) {
-            if (value < _minimummTaskTime) {
+            if (value < _minimumTaskTime) {
                 throw new IncorrectRangeException("maximum value of task time can not be less, then minimum value");
             }
 
             _maximumTaskTime = value;
         }
-    }*/
+    }
 
-    private Boolean IsValueInAvailableRange(short value)
+    private Boolean IsValueInAvailableRange(int value)
             throws OutOfPossibleRangeException
     {
         if (value > POSSIBLE_MAXIMUM_TASK_TIME || value < POSSIBLE_MINIMUM_TASK_TIME) {

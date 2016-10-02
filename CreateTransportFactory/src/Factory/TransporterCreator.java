@@ -3,6 +3,7 @@ package Factory;
 import Exceptions.TransorterNotRealizedExceptioin;
 import TransportCommon.IDataTransporter;
 import TransportCommon.TransporterSide;
+import Transporter.FakeTransporter;
 import Transporter.TcpDataTransporter;
 
 /**
@@ -16,6 +17,8 @@ public class TransporterCreator {
         {
             case Tcp:
                 return new TcpDataTransporter(address, port, side);
+            case Fake:
+                return new FakeTransporter(address, port, side);
             default:
                 throw new TransorterNotRealizedExceptioin("you must realize transporter");
         }

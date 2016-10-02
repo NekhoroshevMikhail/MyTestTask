@@ -15,6 +15,10 @@ public class MinimumDurationArgumentBody implements IPacketArgument {
         return TaskPacketArgumentType.MinimumDurationArgument;
     }
 
+    public int GetMinimumDuration() {
+        return _minimumDuration;
+    }
+
     public MinimumDurationArgumentBody() {
     }
 

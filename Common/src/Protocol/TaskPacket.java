@@ -61,7 +61,7 @@ public class TaskPacket {
         }
     }
 
-    public Boolean IsPacketCorrect(){
+    public Boolean IsCorrect(){
         return  !_isPacketIncorrect;
     }
 

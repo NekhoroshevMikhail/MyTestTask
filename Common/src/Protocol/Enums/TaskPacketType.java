@@ -12,5 +12,6 @@ public class TaskPacketType {
     public static final byte TaskCompletedAck = 0x04;
     public static final byte TaskError = 0x05;
     public static final byte TaskErrorAck = 0x06;
-    public static final byte Unknown = 0x07;
+    public static final byte WorkingNodeIsBusy = 0x07;
+    public static final byte Unknown = 0x08;
 }

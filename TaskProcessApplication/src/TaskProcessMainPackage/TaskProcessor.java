@@ -1,67 +1,93 @@
 package TaskProcessMainPackage;
 
-import Exceptions.SideOfTransporterNotRealizedException;
-import Exceptions.TransorterNotRealizedExceptioin;
-import Factory.PossibleTransport;
-import Factory.TransporterCreator;
-import TransportCommon.IDataReceivedListener;
-import TransportCommon.IDataTransporter;
-import TransportCommon.TransporterSide;
+import DataModel.MyTask;
+import Exceptions.ArgumentNullException;
+import TaskProcessMainPackage.Enums.TaskThreadState;
+import TaskProcessMainPackage.Events.ITaskThreadStateChangedListener;
 
-import java.awt.*;
+import java.util.ArrayList;
+import java.util.Random;
 
 /**
- * Created by nekho on 30-Sep-16.
+ * Created by nekho on 02-Oct-16.
  */
-public class TaskProcessor implements Runnable, IDataReceivedListener {
-    private String _machineName;
-    private int _port;
-    private IDataTransporter _dataTransporter;
+public class TaskProcessor implements Runnable {
 
-    public TaskProcessor(String machineName, int port) {
-        _machineName = machineName;
-        _port = port;
+    private ArrayList<ITaskThreadStateChangedListener> _listeners;
+    private MyTask _taskToPerform;
+    private int _calculatedTaskDuration;
+    private TaskThreadState _previousState;
+    private TaskThreadState _currentState;
+
+    public TaskProcessor() {
+        _listeners = new ArrayList<>();
+        _previousState = TaskThreadState.Idle;
+        _currentState = TaskThreadState.Idle;
+    }
+
+    public void SetTask(MyTask taskToPerform) throws ArgumentNullException {
+        if (taskToPerform == null) {
+            throw new ArgumentNullException("you need to specify task!");
+        }
+        _taskToPerform = taskToPerform;
+        CalculateTaskDuration();
+    }
+
+    private void CalculateTaskDuration() {
+        Random rand = new Random();
+        int max = _taskToPerform.getMaximumTaskTime();
+        int min = _taskToPerform.getMinimumTaskTime();
+        _calculatedTaskDuration = rand.nextInt((max - min) + 1) + min;
+    }
+
+    public int GetCalculatedTaskDuration() {
+        return _calculatedTaskDuration;
+    }
+
+    public TaskThreadState GetCurrentState() {
+        return _currentState;
+    }
+
+    public void AddTaskStateChangedListener(ITaskThreadStateChangedListener listener) {
+        synchronized (_listeners) {
+            _listeners.add(listener);
+        }
+    }
+
+    public void RemoveTaskStateChangedListener(ITaskThreadStateChangedListener listener) {
+        synchronized (_listeners) {
+            _listeners.remove(listener);
+        }
     }
 
     @Override
     public void run() {
-         try {
-            _dataTransporter = TransporterCreator.CreateDataTransporter(PossibleTransport.Tcp, "localhost", _port, TransporterSide.Server);
-            _dataTransporter.AddDataReceivedListener(this);
-            _dataTransporter.TryConnect();
-            _dataTransporter.StartListenIncomingData();
-        } catch (TransorterNotRealizedExceptioin ex) {
-            ex.printStackTrace();
-        } catch (SideOfTransporterNotRealizedException e) {
+        ChangeState(TaskThreadState.InProgress);
+        try {
+            Thread.sleep(_calculatedTaskDuration);
+        } catch (InterruptedException e) {
             e.printStackTrace();
+            ChangeState(TaskThreadState.Error);
         }
+        ChangeState(TaskThreadState.Idle);
+    }
 
-        if (_dataTransporter != null) {
-            while(_dataTransporter.IsConnected()) {
-                try {
-                    Thread.sleep(10000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+    private void ChangeState(TaskThreadState newState) {
+        _previousState =_currentState;
+        _currentState = newState;
+
+        synchronized (_listeners) {
+            for (ITaskThreadStateChangedListener listener : _listeners) {
+                listener.TaskThreadStateChanged(_previousState, _currentState);
             }
         }
     }
 
-    Frame fr;
-    @Override
-    public void DataReceived(byte[] data) {
-        if (fr == null) {
-            fr = new Frame();
-            Label label = new Label("123123123");
-            fr.add(label);
-            fr.setSize(300,300);
-            fr.setVisible(true);
-        }
+    public String GetCurrentTaskName() {
+        return _taskToPerform.getName();
     }
 
-    private void Stop()
-    {
-        _dataTransporter.RemoveDataReceivedListener(this);
-        _dataTransporter.Disconnect();
+    public int GetCurrentTaskDuration() {
+        return _calculatedTaskDuration;
     }
 }
