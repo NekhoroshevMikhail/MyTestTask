@@ -37,7 +37,7 @@ public class TaskProcessor implements Runnable {
         Random rand = new Random();
         int max = _taskToPerform.getMaximumTaskTime();
         int min = _taskToPerform.getMinimumTaskTime();
-        _calculatedTaskDuration = rand.nextInt((max - min) + 1) + min;
+        _calculatedTaskDuration = (rand.nextInt((max - min) + 1) + min) * 1000;
     }
 
     public int GetCalculatedTaskDuration() {

@@ -142,8 +142,8 @@ public class TaskManager implements Runnable, IDataReceivedListener, ITaskThread
     }
 
     private void SetTaskInfoToFrame(String machineName, int taskDuration) {
-        _machineNameLabel.setText(String.format("Current Machine Name: {0}", machineName));
-        _taskDurationLabel.setText(String.format("Current Task Duration: {0}", taskDuration));
+        _machineNameLabel.setText("Current Machine Name: " + machineName);
+        _taskDurationLabel.setText("Current Task Duration: " +  taskDuration);
     }
 
     private void ProcessNewTask(MyTask myTask) throws StartTaskProcessException {

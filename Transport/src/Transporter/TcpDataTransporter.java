@@ -163,7 +163,6 @@ public class TcpDataTransporter implements IDataTransporter {
                 }
             }
         });
-        Boolean result = listenDataThread.isDaemon();
         listenDataThread.start();
     }
 }
